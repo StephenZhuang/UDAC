@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface ViewController : UIViewController<UITextFieldDelegate>
+@property (nonatomic , weak) IBOutlet UITextField *usernameTextField;
+@property (nonatomic , weak) IBOutlet UITextField *passwordTextField;
 @end

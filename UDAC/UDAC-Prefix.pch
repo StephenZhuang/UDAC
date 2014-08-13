@@ -13,4 +13,14 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import "UIViewController+TitleView.h"
+    #define NLSystemVersionGreaterOrEqualThan(version) ([[[UIDevice currentDevice] systemVersion] floatValue] >= version)
+    #define IOS7_OR_LATER NLSystemVersionGreaterOrEqualThan(7.0)
+    #define RGB(r,g,b) ([UIColor colorWithRed:r / 255.0 green:g / 255.0 blue:b /255.0 alpha:1.0])
+    #import "Frame.h"
+    #import "Gongying.h"
+    #import "GongT.h"
+    #import "WebServiceRead.h"
+    #import "JSONKit.h"
+    #import "ToolUtils.h"
 #endif
