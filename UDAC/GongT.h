@@ -107,7 +107,7 @@
 	/**
 		商品总额
 	*/
-	@property(retain) NSString *allprice;
+//	@property(retain) NSString *allprice;
 
 @end
 
@@ -191,7 +191,8 @@
 	/**
 		产品单价
 	*/
-	@property(retain) NSString *cpprice;
+	@property(retain) NSNumber *cpprice;
+    @property(assign) int num;
 
 @end
 

@@ -33,7 +33,7 @@
 @synthesize cpname; //商品名称
 @synthesize cpcount; //商品数量
 @synthesize cpprice; //商品单价
-@synthesize allprice; //商品总额
+//@synthesize allprice; //商品总额
 
 - (void) build:(NSDictionary*)json{
         allcount=[JsonData getJsonString:json key:@"allcount"]; //总数
@@ -158,13 +158,16 @@
 @synthesize cpname; //商品名称
 @synthesize pk_cpkey; //产品Key
 @synthesize cpprice; //产品单价
+@synthesize num;
 
 - (void) build:(NSDictionary*)json{
         mclass=[JsonData getJsonString:json key:@"class"]; //固定不用管
         cpcode=[JsonData getJsonString:json key:@"cpcode"]; //商品编码
         cpname=[JsonData getJsonString:json key:@"cpname"]; //商品名称
         pk_cpkey=[JsonData getJsonString:json key:@"pk_cpkey"]; //产品Key
-        cpprice=[JsonData getJsonString:json key:@"cpprice"]; //产品单价
+//        cpprice=[JsonData getJsonString:json key:@"cpprice"]; //产品单价
+    cpprice = [json objectForKey:@"cpprice"];
+    num = 0;
 }
 
 
