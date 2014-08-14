@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MenuCell : UICollectionViewCell
-@property (nonatomic , strong) IBOutlet UILabel *TitleLabel;
+@property (nonatomic , strong) IBOutlet UILabel *titleLabel;
 @property (nonatomic , strong) IBOutlet UILabel *subTitleLabel;
 @end

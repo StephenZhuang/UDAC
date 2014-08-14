@@ -2,7 +2,7 @@
 //  GongT.h
 //  GongT
 //
-//  Created by ryan on 2014-08-12 17:33:46
+//  Created by ryan on 2014-08-13 18:50:48
 //  Copyright (c) ryan All rights reserved.
 //
 //
@@ -83,6 +83,31 @@
 		发货状态
 	*/
 	@property(retain) NSString *sendstatus;
+
+	/**
+		商品编码
+	*/
+	@property(retain) NSString *cpcode;
+
+	/**
+		商品名称
+	*/
+	@property(retain) NSString *cpname;
+
+	/**
+		商品数量
+	*/
+	@property(retain) NSString *cpcount;
+
+	/**
+		商品单价
+	*/
+	@property(retain) NSString *cpprice;
+
+	/**
+		商品总额
+	*/
+	@property(retain) NSString *allprice;
 
 @end
 
@@ -241,6 +266,58 @@
 		评论列表
 	*/
 	@property(retain) NSMutableArray *data;
+
+@end
+
+/**  */
+@interface QueryAllMyJLOrder: MJsonData
+
+
+	/**
+		总数
+	*/
+	@property(retain) NSString *dbillcode;
+
+	/**
+		总额
+	*/
+	@property(retain) NSString *allcount;
+
+	/**
+		审批日期
+	*/
+	@property(retain) NSString *backdate;
+
+	/**
+		发货状态
+	*/
+	@property(retain) NSString *appstatus;
+
+	/**
+		兑换日期
+	*/
+	@property(retain) NSString *appdate;
+	@property(retain) NSString *sendstatus;
+
+	/**
+		联系地址
+	*/
+	@property(retain) NSString *senddate;
+
+	/**
+		联系人
+	*/
+	@property(retain) NSString *sendcount;
+
+	/**
+		 联系电话
+	*/
+	@property(retain) NSString *surestatus;
+
+	/**
+		货运单号 
+	*/
+	@property(retain) NSString *suredate;
 
 @end
 

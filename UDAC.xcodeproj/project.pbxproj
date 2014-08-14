@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77520937199C504500840587 /* KCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77520936199C504500840587 /* KCTableViewController.m */; };
+		7752093A199C53A500840587 /* GoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77520939199C53A500840587 /* GoodsCell.m */; };
+		7752093D199C5B8400840587 /* SoldTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7752093C199C5B8400840587 /* SoldTableViewController.m */; };
+		77520940199C8E8B00840587 /* ExchangeHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7752093F199C8E8B00840587 /* ExchangeHistoryTableViewController.m */; };
 		775A8DDA199B8357008E2B38 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 775A8DD9199B8357008E2B38 /* Foundation.framework */; };
 		775A8DDC199B8357008E2B38 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 775A8DDB199B8357008E2B38 /* CoreGraphics.framework */; };
 		775A8DDE199B8357008E2B38 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 775A8DDD199B8357008E2B38 /* UIKit.framework */; };
@@ -72,6 +76,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		77520935199C504500840587 /* KCTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KCTableViewController.h; sourceTree = "<group>"; };
+		77520936199C504500840587 /* KCTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KCTableViewController.m; sourceTree = "<group>"; };
+		77520938199C53A500840587 /* GoodsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsCell.h; sourceTree = "<group>"; };
+		77520939199C53A500840587 /* GoodsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsCell.m; sourceTree = "<group>"; };
+		7752093B199C5B8400840587 /* SoldTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoldTableViewController.h; sourceTree = "<group>"; };
+		7752093C199C5B8400840587 /* SoldTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoldTableViewController.m; sourceTree = "<group>"; };
+		7752093E199C8E8B00840587 /* ExchangeHistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExchangeHistoryTableViewController.h; sourceTree = "<group>"; };
+		7752093F199C8E8B00840587 /* ExchangeHistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExchangeHistoryTableViewController.m; sourceTree = "<group>"; };
 		775A8DD6199B8357008E2B38 /* UDAC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UDAC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		775A8DD9199B8357008E2B38 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		775A8DDB199B8357008E2B38 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -589,8 +601,14 @@
 				775A8DEF199B8357008E2B38 /* ViewController.m */,
 				775A8ED2199B8FF0008E2B38 /* MenuViewController.h */,
 				775A8ED3199B8FF0008E2B38 /* MenuViewController.m */,
+				77520935199C504500840587 /* KCTableViewController.h */,
+				77520936199C504500840587 /* KCTableViewController.m */,
 				775A8ECF199B8EEA008E2B38 /* UIViewController+TitleView.h */,
 				775A8ED0199B8EEA008E2B38 /* UIViewController+TitleView.m */,
+				7752093B199C5B8400840587 /* SoldTableViewController.h */,
+				7752093C199C5B8400840587 /* SoldTableViewController.m */,
+				7752093E199C8E8B00840587 /* ExchangeHistoryTableViewController.h */,
+				7752093F199C8E8B00840587 /* ExchangeHistoryTableViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -618,6 +636,8 @@
 				775A8EDE199B9B67008E2B38 /* MenuHeader.m */,
 				775A8EE0199B9B9E008E2B38 /* MenuCell.h */,
 				775A8EE1199B9B9E008E2B38 /* MenuCell.m */,
+				77520938199C53A500840587 /* GoodsCell.h */,
+				77520939199C53A500840587 /* GoodsCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -738,6 +758,8 @@
 				775A8EA8199B8562008E2B38 /* GongT.m in Sources */,
 				775A8EAA199B8562008E2B38 /* Ios6QRViewController.m in Sources */,
 				775A8EB6199B8562008E2B38 /* qrspec.c in Sources */,
+				7752093A199C53A500840587 /* GoodsCell.m in Sources */,
+				7752093D199C5B8400840587 /* SoldTableViewController.m in Sources */,
 				775A8EA9199B8562008E2B38 /* Gongying.m in Sources */,
 				775A8EAB199B8562008E2B38 /* Ios7QRViewController.m in Sources */,
 				775A8EB3199B8562008E2B38 /* QRCodeGenerator.m in Sources */,
@@ -746,6 +768,8 @@
 				775A8DEA199B8357008E2B38 /* AppDelegate.m in Sources */,
 				775A8EB1199B8562008E2B38 /* bitstream.c in Sources */,
 				775A8EAC199B8562008E2B38 /* JSONKit.m in Sources */,
+				77520937199C504500840587 /* KCTableViewController.m in Sources */,
+				77520940199C8E8B00840587 /* ExchangeHistoryTableViewController.m in Sources */,
 				775A8EAE199B8562008E2B38 /* TitleView.m in Sources */,
 				775A8EB7199B8562008E2B38 /* rscode.c in Sources */,
 				775A8EB4199B8562008E2B38 /* qrencode.c in Sources */,
@@ -972,6 +996,7 @@
 				775A8E0A199B8357008E2B38 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		775A8E0B199B8357008E2B38 /* Build configuration list for PBXNativeTarget "UDACTests" */ = {
 			isa = XCConfigurationList;
@@ -980,6 +1005,7 @@
 				775A8E0D199B8357008E2B38 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -2,7 +2,7 @@
 //  GongT.h
 //  GongT
 //
-//  Created by ryan on 2014-08-12 17:33:46
+//  Created by ryan on 2014-08-13 18:50:48
 //  Copyright (c) ryan All rights reserved.
 //
 //
@@ -29,6 +29,11 @@
 @synthesize sendcorp; //发货公司
 @synthesize senddate; //发货日期
 @synthesize sendstatus; //发货状态
+@synthesize cpcode; //商品编码
+@synthesize cpname; //商品名称
+@synthesize cpcount; //商品数量
+@synthesize cpprice; //商品单价
+@synthesize allprice; //商品总额
 
 - (void) build:(NSDictionary*)json{
         allcount=[JsonData getJsonString:json key:@"allcount"]; //总数
@@ -45,6 +50,11 @@
         sendcorp=[JsonData getJsonString:json key:@"sendcorp"]; //发货公司
         senddate=[JsonData getJsonString:json key:@"senddate"]; //发货日期
         sendstatus=[JsonData getJsonString:json key:@"sendstatus"]; //发货状态
+        cpcode=[JsonData getJsonString:json key:@"cpcode"]; //商品编码
+        cpname=[JsonData getJsonString:json key:@"cpname"]; //商品名称
+        cpcount=[JsonData getJsonString:json key:@"cpcount"]; //商品数量
+        cpprice=[JsonData getJsonString:json key:@"cpprice"]; //商品单价
+        allprice=[JsonData getJsonString:json key:@"allprice"]; //商品总额
 }
 
 
@@ -105,6 +115,36 @@
         dhje=[JsonData getJsonString:json key:@"dhje"]; //兑换额度
         ffe=[JsonData getJsonString:json key:@"ffe"]; //发放金额
         yue=[JsonData getJsonString:json key:@"yue"]; //余额 
+}
+
+
+@end
+
+/*****  *****/
+@implementation QueryAllMyJLOrder
+
+@synthesize dbillcode; //总数
+@synthesize allcount; //总额
+@synthesize backdate; //审批日期
+@synthesize appstatus; //发货状态
+@synthesize appdate; //兑换日期
+@synthesize sendstatus;
+@synthesize senddate; //联系地址
+@synthesize sendcount; //联系人
+@synthesize surestatus; // 联系电话
+@synthesize suredate; //货运单号 
+
+- (void) build:(NSDictionary*)json{
+        dbillcode=[JsonData getJsonString:json key:@"dbillcode"]; //总数
+        allcount=[JsonData getJsonString:json key:@"allcount"]; //总额
+        backdate=[JsonData getJsonString:json key:@"backdate"]; //审批日期
+        appstatus=[JsonData getJsonString:json key:@"appstatus"]; //发货状态
+        appdate=[JsonData getJsonString:json key:@"appdate"]; //兑换日期
+        sendstatus=[JsonData getJsonString:json key:@"sendstatus"];
+        senddate=[JsonData getJsonString:json key:@"senddate"]; //联系地址
+        sendcount=[JsonData getJsonString:json key:@"sendcount"]; //联系人
+        surestatus=[JsonData getJsonString:json key:@"surestatus"]; // 联系电话
+        suredate=[JsonData getJsonString:json key:@"suredate"]; //货运单号 
 }
 
 

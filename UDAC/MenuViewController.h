@@ -10,4 +10,6 @@
 
 @interface MenuViewController : UIViewController<UICollectionViewDataSource ,UICollectionViewDelegate>
 @property (nonatomic , weak) IBOutlet UICollectionView *collectionView;
+@property (nonatomic , strong) NSArray *colorArray;
+@property (nonatomic , strong) NSMutableArray *titleArray;
 @end
