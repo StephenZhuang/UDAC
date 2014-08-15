@@ -1,20 +1,21 @@
 //
-//  JifenOrderTableViewController.m
+//  OrderDetailTableViewController.m
 //  UDAC
 //
-//  Created by Stephen Zhuang on 14-8-14.
+//  Created by Stephen Zhuang on 14-8-15.
 //  Copyright (c) 2014年 udows. All rights reserved.
 //
 
-#import "JifenOrderTableViewController.h"
-#import "OrderCell.h"
 #import "OrderDetailTableViewController.h"
+#import "OrderCell.h"
+#import "GoodsCell.h"
 
-@interface JifenOrderTableViewController ()
+@interface OrderDetailTableViewController ()
 
 @end
 
-@implementation JifenOrderTableViewController
+@implementation OrderDetailTableViewController
+@synthesize order;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -34,12 +35,41 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    [self addTitleView:@"积分" subTitle:@"积分订单"];
+    [self addTitleView:@"积分" subTitle:@"订单详情"];
     _dataArray = [[NSMutableArray alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshControlValueChanged) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl beginRefreshing];
     [self loadData];
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"删除" style:UIBarButtonItemStyleBordered target:self action:@selector(deleteAction)];
+    [item setTintColor:[UIColor whiteColor]];
+    self.navigationItem.rightBarButtonItem = item;
+}
+                             
+- (void)deleteAction
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:order.dbillcode forKey:@"billcode"];
+    [dic setObject:@"com.shqj.webservice.entity.UserKeyAndOrderCode" forKey: @"class"];
+    [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"key"];
+    NSString *jsonString = [dic JSONString];
+    [params setObject:jsonString forKey: @"userandcode"];
+    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(deleteFinished:)];
+    [webservice postWithMethodName:@"jf_doDeleteMyOrder" params: params];
+}
+
+- (void)deleteFinished:(NSString *)data
+{
+    NSDictionary *dic = [data objectFromJSONString];
+    MakeJFOrder *retn = [[MakeJFOrder alloc] init];
+    [retn build:dic];
+    if (retn.returntype.integerValue == 1) {
+        [ProgressHUD showSuccess:@"删除成功"];
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [ProgressHUD showError:retn.retuenmsg];
+    }
 }
 
 - (void)refreshControlValueChanged
@@ -53,21 +83,22 @@
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    [dic setObject:@"com.shqj.webservice.entity.UserKey" forKey: @"class"];
+    [dic setObject:order.dbillcode forKey:@"billcode"];
+    [dic setObject:@"com.shqj.webservice.entity.UserKeyAndOrderCode" forKey: @"class"];
     [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"key"];
     NSString *jsonString = [dic JSONString];
-    [params setObject:jsonString forKey: @"userkey"];
+    [params setObject:jsonString forKey: @"userandcode"];
     WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinished:)];
-    [webservice postWithMethodName:@"jf_doQueryAllMyOrder" params: params];
+    [webservice postWithMethodName:@"jf_doQueryDetailByCode" params: params];
 }
 
 - (void)webServiceFinished:(NSString *)data
 {
     NSDictionary *dic = [data objectFromJSONString];
-    QueryAllMyOrderList *orderList = [[QueryAllMyOrderList alloc] init];
-    [orderList build:dic];
+    QueryDetailByCodeList *detailList = [[QueryDetailByCodeList alloc] init];
+    [detailList build:dic];
     [self.dataArray removeAllObjects];
-    [self.dataArray addObjectsFromArray:orderList.data];
+    [self.dataArray addObjectsFromArray:detailList.data];
     [self.tableView reloadData];
     if (self.refreshControl.refreshing) {
         [self.refreshControl endRefreshing];
@@ -85,40 +116,69 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return self.dataArray.count;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 1;
+    if (section == 0) {
+        return 1;
+    }
+    return self.dataArray.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    return 10;
+//}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return 10;
+    if (section == 0) {
+        return @"订单信息";
+    } else {
+        return @"商品信息";
+    }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        return 248;
+    } else {
+        return 100;
+    }
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    OrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    
-    QueryAllMyOrder *order = [self.dataArray objectAtIndex:indexPath.section];
-    [cell.orderLabel setText:order.dbillcode];
-    [cell.statusLabel setText:order.sendstatus];
-    [cell.sendCompanyLabel setText:order.sendcorp];
-    [cell.sendDateLabel setText:order.senddate];
-    [cell.sendOrderLabel setText:order.sendcode];
-    [cell.nameLabel setText:order.connectman];
-    [cell.addressLabel setText:order.connectaddr];
-    [cell.phoneLabel setText:order.connectmoblie];
-    [cell.corpDateLabel setText:order.backdate];
-    [cell.reviewLabel setText:order.appstatus];
-    [cell.countLabel setText:order.allcount.stringValue];
-    [cell.priceLabel setText:order.allprice.stringValue];
-    
-    return cell;
+    if (indexPath.section == 0) {
+        OrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+        
+        [cell.orderLabel setText:order.dbillcode];
+        [cell.statusLabel setText:order.sendstatus];
+        [cell.sendCompanyLabel setText:order.sendcorp];
+        [cell.sendDateLabel setText:order.senddate];
+        [cell.sendOrderLabel setText:order.sendcode];
+        [cell.nameLabel setText:order.connectman];
+        [cell.addressLabel setText:order.connectaddr];
+        [cell.phoneLabel setText:order.connectmoblie];
+        [cell.corpDateLabel setText:order.backdate];
+        [cell.reviewLabel setText:order.appstatus];
+        [cell.countLabel setText:order.allcount.stringValue];
+        [cell.priceLabel setText:order.allprice.stringValue];
+        
+        return cell;
+    } else {
+        GoodsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GoodsCell"];
+        QueryAllMyOrder *detail = [self.dataArray objectAtIndex:indexPath.row];
+        [cell.nameLabel setText:detail.cpname];
+        [cell.codeLabel setText:detail.cpcount.stringValue];
+        [cell.countLabel setText:detail.cpprice.stringValue];
+        [cell.priceLabel setText:detail.allprice.stringValue];
+        return cell;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -164,7 +224,7 @@
 }
 */
 
-
+/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -172,12 +232,7 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    OrderDetailTableViewController *vc = segue.destinationViewController;
-    OrderCell *cell = sender;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    QueryAllMyOrder *order = self.dataArray[indexPath.section];
-    vc.order = order;
 }
-
+*/
 
 @end

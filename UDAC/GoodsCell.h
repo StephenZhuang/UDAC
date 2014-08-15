@@ -12,6 +12,7 @@
 @property (nonatomic , strong) IBOutlet UILabel *nameLabel;
 @property (nonatomic , strong) IBOutlet UILabel *codeLabel;
 @property (nonatomic , strong) IBOutlet UILabel *countLabel;
+@property (nonatomic , strong) IBOutlet UILabel *priceLabel;
 @property (nonatomic , strong) IBOutlet UIButton *sellButton;
 @property (nonatomic , strong) IBOutlet UIButton *minusButton;
 @property (nonatomic , strong) IBOutlet UIButton *plusButton;

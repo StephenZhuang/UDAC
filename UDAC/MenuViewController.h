@@ -12,4 +12,5 @@
 @property (nonatomic , weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic , strong) NSArray *colorArray;
 @property (nonatomic , strong) NSMutableArray *titleArray;
+@property (nonatomic , strong) QueryJlJECount *queryJlJECount;
 @end

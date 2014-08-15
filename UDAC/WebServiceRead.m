@@ -30,6 +30,16 @@
     return self;
 }
 
+- (id)initWithBlock:(SuccessBlock)block
+{
+    self = [super init];
+    if (self) {
+        showLoading = NO;
+        _successBlock = block;
+    }
+    return self;
+}
+
 - (void)postWithMethodName:(NSString *)methodName params:(NSDictionary *)params
 {
     [self post:methodName namespace:DEFAULT_NAMESPACE url:DEFAULT_URL params:params];
@@ -116,6 +126,9 @@
             @try{
                 if(delegate && [delegate respondsToSelector:mselector]){
                     [delegate performSelector:mselector withObject:res ];
+                }
+                if (_successBlock) {
+                    _successBlock(res);
                 }
             }@catch (NSException *e) {
                 

@@ -21,12 +21,12 @@
 	/**
 		总数
 	*/
-	@property(retain) NSString *allcount;
+	@property(retain) NSNumber *allcount;
 
 	/**
 		总额
 	*/
-	@property(retain) NSString *allprice;
+	@property(retain) NSNumber *allprice;
 
 	/**
 		审批日期
@@ -97,12 +97,12 @@
 	/**
 		商品数量
 	*/
-	@property(retain) NSString *cpcount;
+	@property(retain) NSNumber *cpcount;
 
 	/**
 		商品单价
 	*/
-	@property(retain) NSString *cpprice;
+	@property(retain) NSNumber *cpprice;
 
 	/**
 		商品总额
@@ -129,12 +129,12 @@
 	/**
 		代表总额
 	*/
-	@property(retain) NSString *je;
+	@property(retain) NSNumber *je;
 
 	/**
 		代表总数量 
 	*/
-	@property(retain) NSString *kccount;
+	@property(retain) NSNumber *kccount;
 
 @end
 
@@ -145,22 +145,22 @@
 	/**
 		累计奖励额度
 	*/
-	@property(retain) NSString *allje;
+	@property(retain) NSNumber *allje;
 
 	/**
 		兑换额度
 	*/
-	@property(retain) NSString *dhje;
+	@property(retain) NSNumber *dhje;
 
 	/**
 		发放金额
 	*/
-	@property(retain) NSString *ffe;
+	@property(retain) NSNumber *ffe;
 
 	/**
 		余额 
 	*/
-	@property(retain) NSString *yue;
+	@property(retain) NSNumber *yue;
 
 @end
 
@@ -282,7 +282,7 @@
 	/**
 		总额
 	*/
-	@property(retain) NSString *allcount;
+	@property(retain) NSNumber *allcount;
 
 	/**
 		审批日期
@@ -308,7 +308,7 @@
 	/**
 		联系人
 	*/
-	@property(retain) NSString *sendcount;
+	@property(retain) NSNumber *sendcount;
 
 	/**
 		 联系电话
@@ -322,3 +322,13 @@
 
 @end
 
+/** 查询库存-返回参数(UserccReturn) */
+@interface QueryAllMyJLOrderList: MJsonData
+
+
+/**
+ 评论列表
+ */
+@property(retain) NSMutableArray *data;
+
+@end

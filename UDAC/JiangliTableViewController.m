@@ -1,20 +1,19 @@
 //
-//  JifenOrderTableViewController.m
+//  JiangliTableViewController.m
 //  UDAC
 //
-//  Created by Stephen Zhuang on 14-8-14.
+//  Created by Stephen Zhuang on 14-8-15.
 //  Copyright (c) 2014年 udows. All rights reserved.
 //
 
-#import "JifenOrderTableViewController.h"
-#import "OrderCell.h"
-#import "OrderDetailTableViewController.h"
+#import "JiangliTableViewController.h"
+#import "GoodsCell.h"
 
-@interface JifenOrderTableViewController ()
+@interface JiangliTableViewController ()
 
 @end
 
-@implementation JifenOrderTableViewController
+@implementation JiangliTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -35,7 +34,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    [self addTitleView:@"积分" subTitle:@"积分订单"];
+    [self addTitleView:@"奖励" subTitle:@"奖励兑换"];
     _dataArray = [[NSMutableArray alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshControlValueChanged) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl beginRefreshing];
@@ -58,19 +57,49 @@
     NSString *jsonString = [dic JSONString];
     [params setObject:jsonString forKey: @"userkey"];
     WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinished:)];
-    [webservice postWithMethodName:@"jf_doQueryAllMyOrder" params: params];
+    [webservice postWithMethodName:@"jl_doQueryJlJE" params: params];
 }
 
 - (void)webServiceFinished:(NSString *)data
 {
     NSDictionary *dic = [data objectFromJSONString];
-    QueryAllMyOrderList *orderList = [[QueryAllMyOrderList alloc] init];
-    [orderList build:dic];
-    [self.dataArray removeAllObjects];
-    [self.dataArray addObjectsFromArray:orderList.data];
+    _queryJlJE = [[QueryJlJE alloc] init];
+    [_queryJlJE build:dic];
+//    [self.dataArray removeAllObjects];
+//    [self.dataArray addObjectsFromArray:kcList.data];
     [self.tableView reloadData];
     if (self.refreshControl.refreshing) {
         [self.refreshControl endRefreshing];
+    }
+}
+
+- (IBAction)exchangeAction:(id)sender
+{
+    [self.view endEditing:YES];
+    NSString *num = _numTextField.text;
+    if (num.length == 0) {
+        return;
+    }
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:@"com.shqj.webservice.entity.JLDHOrder" forKey: @"class"];
+    [dic setObject:[NSNumber numberWithInt:num.integerValue] forKey:@"dcount"];
+    [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"pk_key"];
+    NSString *jsonString = [dic JSONString];
+    [params setObject:jsonString forKey: @"jlorder"];
+    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(exchangeFinished:)];
+    [webservice postWithMethodName:@"jl_doMaokeOrder" params: params];
+}
+
+- (void)exchangeFinished:(NSString *)data
+{
+    NSDictionary *dic = [data objectFromJSONString];
+    MakeJFOrder *retn = [[MakeJFOrder alloc] init];
+    [retn build:dic];
+    if (retn.returntype.integerValue == 1) {
+        [ProgressHUD showSuccess:@"兑换成功"];
+    } else {
+        [ProgressHUD showError:retn.retuenmsg];
     }
 }
 
@@ -84,8 +113,11 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if (_queryJlJE) {
+        return 1;
+    }
     // Return the number of sections.
-    return self.dataArray.count;
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -94,37 +126,23 @@
     return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    return 10;
+    return @" ";
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    OrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    GoodsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GoodsCell" forIndexPath:indexPath];
+    [cell.nameLabel setText:_queryJlJE.allje.stringValue];
+    [cell.codeLabel setText:_queryJlJE.dhje.stringValue];
+    [cell.countLabel setText:_queryJlJE.ffe.stringValue];
+    [cell.priceLabel setText:_queryJlJE.yue.stringValue];
     
-    QueryAllMyOrder *order = [self.dataArray objectAtIndex:indexPath.section];
-    [cell.orderLabel setText:order.dbillcode];
-    [cell.statusLabel setText:order.sendstatus];
-    [cell.sendCompanyLabel setText:order.sendcorp];
-    [cell.sendDateLabel setText:order.senddate];
-    [cell.sendOrderLabel setText:order.sendcode];
-    [cell.nameLabel setText:order.connectman];
-    [cell.addressLabel setText:order.connectaddr];
-    [cell.phoneLabel setText:order.connectmoblie];
-    [cell.corpDateLabel setText:order.backdate];
-    [cell.reviewLabel setText:order.appstatus];
-    [cell.countLabel setText:order.allcount.stringValue];
-    [cell.priceLabel setText:order.allprice.stringValue];
     
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
 
 /*
 // Override to support conditional editing of the table view.
@@ -164,7 +182,7 @@
 }
 */
 
-
+/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -172,12 +190,7 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    OrderDetailTableViewController *vc = segue.destinationViewController;
-    OrderCell *cell = sender;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    QueryAllMyOrder *order = self.dataArray[indexPath.section];
-    vc.order = order;
 }
-
+*/
 
 @end

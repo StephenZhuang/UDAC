@@ -36,6 +36,25 @@
     if ([ToolUtils sharedInstance].user.usertype.integerValue == 1) {
         [_titleArray removeObjectAtIndex:2];
     }
+    
+    [self loadData];
+}
+
+- (void)loadData
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:@"com.shqj.webservice.entity.UserKey" forKey: @"class"];
+    [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"key"];
+    NSString *jsonString = [dic JSONString];
+    [params setObject:jsonString forKey: @"userkey"];
+    WebServiceRead *webservice = [[WebServiceRead alloc] initWithBlock:^(NSString *data) {
+        NSDictionary *dic = [data objectFromJSONString];
+        _queryJlJECount = [[QueryJlJECount alloc] init];
+        [_queryJlJECount build:dic];
+        [self.collectionView reloadData];
+    }];
+    [webservice postWithMethodName:@"doQueryAllCountAndJE" params: params];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -65,6 +84,11 @@
     [cell.titleLabel setText:_titleArray[indexPath.row]];
     [cell.subTitleLabel setHidden:indexPath.row!=0];
 
+    if (indexPath.row == 0) {
+        if (_queryJlJECount) {
+            [cell.subTitleLabel setText:[NSString stringWithFormat:@"库存:%@ 总额:%@",_queryJlJECount.kccount ,_queryJlJECount.je]];
+        }
+    }
     return cell;
 }
 

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		770A2C58199DAE50001D884C /* OrderDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 770A2C57199DAE50001D884C /* OrderDetailTableViewController.m */; };
+		770A2C5B199DD035001D884C /* JiangliTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 770A2C5A199DD035001D884C /* JiangliTableViewController.m */; };
+		770A2C5E199DDFB0001D884C /* JiangliOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 770A2C5D199DDFB0001D884C /* JiangliOrderTableViewController.m */; };
 		77520937199C504500840587 /* KCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77520936199C504500840587 /* KCTableViewController.m */; };
 		7752093A199C53A500840587 /* GoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77520939199C53A500840587 /* GoodsCell.m */; };
 		7752093D199C5B8400840587 /* SoldTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7752093C199C5B8400840587 /* SoldTableViewController.m */; };
@@ -79,6 +82,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		770A2C56199DAE50001D884C /* OrderDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailTableViewController.h; sourceTree = "<group>"; };
+		770A2C57199DAE50001D884C /* OrderDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailTableViewController.m; sourceTree = "<group>"; };
+		770A2C59199DD035001D884C /* JiangliTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JiangliTableViewController.h; sourceTree = "<group>"; };
+		770A2C5A199DD035001D884C /* JiangliTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JiangliTableViewController.m; sourceTree = "<group>"; };
+		770A2C5C199DDFB0001D884C /* JiangliOrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JiangliOrderTableViewController.h; sourceTree = "<group>"; };
+		770A2C5D199DDFB0001D884C /* JiangliOrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JiangliOrderTableViewController.m; sourceTree = "<group>"; };
 		77520935199C504500840587 /* KCTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KCTableViewController.h; sourceTree = "<group>"; };
 		77520936199C504500840587 /* KCTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KCTableViewController.m; sourceTree = "<group>"; };
 		77520938199C53A500840587 /* GoodsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsCell.h; sourceTree = "<group>"; };
@@ -622,6 +631,12 @@
 				77520942199CB04000840587 /* ExchangeViewController.m */,
 				77520944199CEBC000840587 /* JifenOrderTableViewController.h */,
 				77520945199CEBC000840587 /* JifenOrderTableViewController.m */,
+				770A2C56199DAE50001D884C /* OrderDetailTableViewController.h */,
+				770A2C57199DAE50001D884C /* OrderDetailTableViewController.m */,
+				770A2C59199DD035001D884C /* JiangliTableViewController.h */,
+				770A2C5A199DD035001D884C /* JiangliTableViewController.m */,
+				770A2C5C199DDFB0001D884C /* JiangliOrderTableViewController.h */,
+				770A2C5D199DDFB0001D884C /* JiangliOrderTableViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -767,6 +782,7 @@
 			files = (
 				775A8EB2199B8562008E2B38 /* mask.c in Sources */,
 				77520949199CECF900840587 /* OrderCell.m in Sources */,
+				770A2C58199DAE50001D884C /* OrderDetailTableViewController.m in Sources */,
 				775A8DF0199B8357008E2B38 /* ViewController.m in Sources */,
 				775A8EE2199B9B9E008E2B38 /* MenuCell.m in Sources */,
 				775A8EB0199B8562008E2B38 /* WebServiceRead.m in Sources */,
@@ -778,6 +794,7 @@
 				7752093D199C5B8400840587 /* SoldTableViewController.m in Sources */,
 				775A8EA9199B8562008E2B38 /* Gongying.m in Sources */,
 				775A8EAB199B8562008E2B38 /* Ios7QRViewController.m in Sources */,
+				770A2C5B199DD035001D884C /* JiangliTableViewController.m in Sources */,
 				775A8EB3199B8562008E2B38 /* QRCodeGenerator.m in Sources */,
 				77520943199CB04000840587 /* ExchangeViewController.m in Sources */,
 				775A8ED4199B8FF0008E2B38 /* MenuViewController.m in Sources */,
@@ -790,6 +807,7 @@
 				775A8EAE199B8562008E2B38 /* TitleView.m in Sources */,
 				775A8EB7199B8562008E2B38 /* rscode.c in Sources */,
 				77520946199CEBC000840587 /* JifenOrderTableViewController.m in Sources */,
+				770A2C5E199DDFB0001D884C /* JiangliOrderTableViewController.m in Sources */,
 				775A8EB4199B8562008E2B38 /* qrencode.c in Sources */,
 				775A8EB5199B8562008E2B38 /* qrinput.c in Sources */,
 				775A8ED1199B8EEA008E2B38 /* UIViewController+TitleView.m in Sources */,
@@ -920,6 +938,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiangsu Youdu Software Co. Ltd";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UDAC/UDAC-Prefix.pch";
 				INFOPLIST_FILE = "UDAC/UDAC-Info.plist";
@@ -929,7 +948,7 @@
 					"$(PROJECT_DIR)/UDAC/ZBarSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E9B19EBD-6296-476F-BB76-77E2DE37A702";
+				PROVISIONING_PROFILE = "7407AFAC-D01B-4D8F-91F7-81A386194FD4";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -940,6 +959,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiangsu Youdu Software Co. Ltd";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UDAC/UDAC-Prefix.pch";
 				INFOPLIST_FILE = "UDAC/UDAC-Info.plist";
@@ -949,7 +969,7 @@
 					"$(PROJECT_DIR)/UDAC/ZBarSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E9B19EBD-6296-476F-BB76-77E2DE37A702";
+				PROVISIONING_PROFILE = "7407AFAC-D01B-4D8F-91F7-81A386194FD4";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

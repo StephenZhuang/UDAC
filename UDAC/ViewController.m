@@ -73,7 +73,7 @@
     Login *login = [[Login alloc] init];
     [login build:dic];
     if (login.returntype.integerValue == 1) {
-//        [ProgressHUD showSuccess:@"登录成功"];
+        [ProgressHUD showSuccess:@"登录成功"];
         ToolUtils *toolUtils = [ToolUtils sharedInstance];
         toolUtils.username = _usernameTextField.text;
         toolUtils.password = _passwordTextField.text;

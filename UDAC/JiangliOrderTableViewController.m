@@ -1,20 +1,19 @@
 //
-//  JifenOrderTableViewController.m
+//  JiangliOrderTableViewController.m
 //  UDAC
 //
-//  Created by Stephen Zhuang on 14-8-14.
+//  Created by Stephen Zhuang on 14-8-15.
 //  Copyright (c) 2014年 udows. All rights reserved.
 //
 
-#import "JifenOrderTableViewController.h"
+#import "JiangliOrderTableViewController.h"
 #import "OrderCell.h"
-#import "OrderDetailTableViewController.h"
 
-@interface JifenOrderTableViewController ()
+@interface JiangliOrderTableViewController ()
 
 @end
 
-@implementation JifenOrderTableViewController
+@implementation JiangliOrderTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -35,7 +34,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    [self addTitleView:@"积分" subTitle:@"积分订单"];
+    [self addTitleView:@"奖励" subTitle:@"奖励订单"];
     _dataArray = [[NSMutableArray alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshControlValueChanged) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl beginRefreshing];
@@ -58,13 +57,13 @@
     NSString *jsonString = [dic JSONString];
     [params setObject:jsonString forKey: @"userkey"];
     WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinished:)];
-    [webservice postWithMethodName:@"jf_doQueryAllMyOrder" params: params];
+    [webservice postWithMethodName:@"jl_doQueryMyjlOrder" params: params];
 }
 
 - (void)webServiceFinished:(NSString *)data
 {
     NSDictionary *dic = [data objectFromJSONString];
-    QueryAllMyOrderList *orderList = [[QueryAllMyOrderList alloc] init];
+    QueryAllMyJLOrderList *orderList = [[QueryAllMyJLOrderList alloc] init];
     [orderList build:dic];
     [self.dataArray removeAllObjects];
     [self.dataArray addObjectsFromArray:orderList.data];
@@ -72,6 +71,56 @@
     if (self.refreshControl.refreshing) {
         [self.refreshControl endRefreshing];
     }
+}
+
+- (IBAction)sureAction:(UIButton *)sender
+{
+    QueryAllMyJLOrder *order = self.dataArray[sender.tag];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:@"com.shqj.webservice.entity.UserKeyAndOrderCode" forKey: @"class"];
+    [dic setObject:order.dbillcode forKey:@"billcode"];
+    [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"key"];
+    NSString *jsonString = [dic JSONString];
+    [params setObject:jsonString forKey: @"userandcode"];
+    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(sureFinished:)];
+    [webservice postWithMethodName:@"jl_doSureMyOrder" params: params];
+}
+
+- (void)sureFinished:(NSString *)data
+{
+    NSDictionary *dic = [data objectFromJSONString];
+    MakeJFOrder *retn = [[MakeJFOrder alloc] init];
+    [retn build:dic];
+    if (retn.returntype.integerValue == 1) {
+        [ProgressHUD showSuccess:retn.retuenmsg];
+    } else {
+        [ProgressHUD showError:retn.retuenmsg];
+    }
+}
+
+- (IBAction)deleteAction:(UIButton *)sender
+{
+    QueryAllMyJLOrder *order = self.dataArray[sender.tag];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:@"com.shqj.webservice.entity.UserKeyAndOrderCode" forKey: @"class"];
+    [dic setObject:order.dbillcode forKey:@"billcode"];
+    [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"key"];
+    NSString *jsonString = [dic JSONString];
+    [params setObject:jsonString forKey: @"userandcode"];
+    WebServiceRead *webservice = [[WebServiceRead alloc] initWithBlock:^(NSString *data) {
+        NSDictionary *dic = [data objectFromJSONString];
+        MakeJFOrder *retn = [[MakeJFOrder alloc] init];
+        [retn build:dic];
+        if (retn.returntype.integerValue == 1) {
+            [self.dataArray removeObjectAtIndex:sender.tag];
+            [self.tableView reloadData];
+        } else {
+            [ProgressHUD showError:retn.retuenmsg];
+        }
+    }];
+    [webservice postWithMethodName:@"jl_doDeleteMyOrder" params: params];
 }
 
 - (void)didReceiveMemoryWarning
@@ -103,21 +152,21 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     OrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    QueryAllMyJLOrder *order = [self.dataArray objectAtIndex:indexPath.section];
     
-    QueryAllMyOrder *order = [self.dataArray objectAtIndex:indexPath.section];
     [cell.orderLabel setText:order.dbillcode];
-    [cell.statusLabel setText:order.sendstatus];
-    [cell.sendCompanyLabel setText:order.sendcorp];
-    [cell.sendDateLabel setText:order.senddate];
-    [cell.sendOrderLabel setText:order.sendcode];
-    [cell.nameLabel setText:order.connectman];
-    [cell.addressLabel setText:order.connectaddr];
-    [cell.phoneLabel setText:order.connectmoblie];
-    [cell.corpDateLabel setText:order.backdate];
-    [cell.reviewLabel setText:order.appstatus];
-    [cell.countLabel setText:order.allcount.stringValue];
-    [cell.priceLabel setText:order.allprice.stringValue];
+    [cell.statusLabel setText:order.allcount.stringValue];
+    [cell.sendCompanyLabel setText:order.backdate];
+    [cell.sendDateLabel setText:order.appstatus];
+    [cell.sendOrderLabel setText:order.appdate];
+    [cell.nameLabel setText:order.sendstatus];
+    [cell.addressLabel setText:order.senddate];
+    [cell.phoneLabel setText:order.allcount.stringValue];
+    [cell.corpDateLabel setText:order.surestatus];
+    [cell.reviewLabel setText:order.suredate];
     
+    cell.deleteButton.tag = indexPath.section;
+    cell.sureButton.tag = indexPath.section;
     return cell;
 }
 
@@ -164,7 +213,7 @@
 }
 */
 
-
+/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -172,12 +221,7 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    OrderDetailTableViewController *vc = segue.destinationViewController;
-    OrderCell *cell = sender;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    QueryAllMyOrder *order = self.dataArray[indexPath.section];
-    vc.order = order;
 }
-
+*/
 
 @end
