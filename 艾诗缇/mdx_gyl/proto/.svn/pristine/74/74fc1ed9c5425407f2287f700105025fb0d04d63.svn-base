@@ -1,0 +1,79 @@
+package com.udows.eshop.proto;
+option java_outer_classname = "MAppIndex";
+import "eshop_goods.proto";
+message MIndex {
+	repeated MFocus focus = 1; //焦点图
+	optional string btns = 2; //用户自定义按钮json
+	repeated MModule module = 3; //活动模块
+	repeated MTopic topic = 4; //主题
+}
+
+message MFocus {
+	optional string id = 1; //id
+	optional int32 type = 2; //1:商品 2:活动
+	optional string img = 3; //图
+}
+
+message MModule {
+	optional int32 type = 1; //1:21 2:21 3:111
+	optional string aImg = 2;
+   	optional string aId = 3;
+   	optional string bImg = 4;
+   	optional string bId = 5;
+   	optional string cImg = 6;
+   	optional string cId = 7;
+   	optional string name = 8;
+}
+
+message MTopic {
+	optional string id = 1;	   //id
+	optional string img = 2;  //图标
+	optional string name = 3;  //名称
+	optional string types = 4;  //类型
+}
+
+message MActivityList{
+	repeated MActivity act = 1;
+	optional string start = 2;  //开始时间
+	optional string end = 3;  //结束时间
+	optional string img = 4;  //图
+}
+
+message MActivity {
+	optional string id = 1;	   //id
+	optional string img = 2;  //图标
+	optional string name = 3;  //名称
+	optional string deadline = 4;  //截止时间
+}
+
+message MTopicDetail {
+	repeated MActivity act = 1;//活动
+}
+
+/**
+@api Index Index	//首页  /mobile?methodno=Index&debug=1&appid=1&deviceid=
+@return MIndex
+*/
+
+/**
+@api Topic Topic	//主题详情 /mobile?methodno=Topic&debug=1&appid=1&deviceid=&id=
+@param required string id
+@return MTopicDetail
+*/
+
+/**
+@api HotSale HotSale	//热卖  /mobile?methodno=HotSale&debug=1&appid=1&deviceid=&ids=
+@param required string ids	//二级分类,隔开
+@return MTopicDetail
+*/
+
+/**
+@api Activity Activity	//活动(分页) /mobile?methodno=Activity&debug=1&appid=1&deviceid=&id=
+@param required string id
+@return MActivityList
+*/
+
+/**
+@api ShakeActivity ShakeActivity	//摇活动 /mobile?methodno=ShakeActivity&debug=1&appid=1&deviceid=
+@return MActivity
+*/

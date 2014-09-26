@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Apis>
+  <Api Package="com.mdx.store.data.proto" Name="" 
+     ApiUrl="">
+    <!--1.1	查询可以兑换商品-->
+    <Url name="jf_doQueryAllCanBackCP" type="21" errorType="0" cacheTime="1" className=".GongT$QueryAllCanBackCPList">jf_doQueryAllCanBackCP</Url>
+    <!--1.1	查询可以兑换商品-->
+    <Url name="jf_doMakeJFOrder" type="21" errorType="0" cacheTime="1" className=".GongT$MakeJFOrder">jf_doMakeJFOrder</Url>
+    <!--1.3	查询我的订单 userkey-->
+    <Url name="jf_doQueryAllMyOrder" type="21" errorType="0" cacheTime="1" className=".GongT$QueryAllMyOrderList">jf_doQueryAllMyOrder</Url>
+    <!--1.3	查询我的订单 userandcode-->
+    <Url name="jf_doQueryDetailByCode" type="21" errorType="0" cacheTime="1" className=".GongT$QueryDetailByCodeList">jf_doQueryDetailByCode</Url>
+    <!--1.3	查询我的订单 userandcode-->
+    <Url name="jf_doDeleteMyOrder" type="21" errorType="0" cacheTime="1" className=".GongT$MakeJFOrder">jf_doDeleteMyOrder</Url>
+    <!--2.3	查询奖励兑换单 userkey-->
+    <Url name="jl_doQueryJlJE" type="21" errorType="0" cacheTime="1" className=".GongT$QueryJlJE">jl_doQueryJlJE</Url>
+    <!--2.4	门店确认兑换单 jlorder-->
+    <Url name="jl_doMaokeOrder" type="21" errorType="0" cacheTime="1" className=".GongT$MakeJFOrder">jl_doMaokeOrder</Url>
+    <!--2.4	门店确认兑换单 userkey-->
+    <Url name="jl_doQueryMyjlOrder" type="21" errorType="0" cacheTime="1" className=".GongT$QueryAllMyJLOrder">jl_doQueryMyjlOrder</Url>
+    <!--2.3	查询奖励兑换单 userandcode-->
+    <Url name="jl_doSureMyOrder" type="21" errorType="0" cacheTime="1" className=".GongT$MakeJFOrder">jl_doSureMyOrder</Url>
+    <!--2.5	删除奖励兑换单接口 userandcode-->
+    <Url name="jl_doDeleteMyOrder" type="21" errorType="0" cacheTime="1" className=".GongT$MakeJFOrder">jl_doDeleteMyOrder</Url>
+    <!--2.5	读取总数-->
+    <Url name="doQueryAllCountAndJE" type="21" errorType="0" cacheTime="1" className=".GongT$QueryJlJECount">doQueryAllCountAndJE</Url>
+    <!--2.5	读取总数 useryhkh-->
+    <Url name="doAddYhkh" type="21" errorType="0" cacheTime="1" className=".GongT$MakeJFOrder">doAddYhkh</Url>
+    <!--2.5	读取总数 userkeypwd-->
+    <Url name="doUpdateMyPWD" type="21" errorType="0" cacheTime="1" className=".GongT$MakeJFOrder">doUpdateMyPWD</Url>
+    <!--登录-传入参数(UserInfo)-->
+    <Url name="DoLogin" type="21" errorType="0" cacheTime="1" className=".Gongying$Login">doLogin</Url>
+    <!--查查询库存-传入参数(UserKey)-->
+    <Url name="DoQueryKc" type="21" errorType="0" cacheTime="1" className=".Gongying$QueryKcList">doQueryKc</Url>
+    <!--查询门店-传入参数(UserKey)-->
+    <Url name="doQueryMD" type="21" errorType="0" cacheTime="1" className=".Gongying$QueryMdList">doQueryMD</Url>
+    <!--查询积分-传入参数(UserKey)-->
+    <Url name="doQueryJdk" type="21" errorType="0" cacheTime="1" className=".Gongying$QueryJdkList">doQueryJdk</Url>
+    <!--扫描-传入参数(Userxsck)-->
+    <Url name="doXsck" type="21" errorType="0" cacheTime="1" className=".Gongying$Xsck">doXsck</Url>
+    <!--扫描码查询商品信息 参数 UserMD-->
+    <Url name="doQueryXjCK" type="21" errorType="0" cacheTime="1" className=".Gongying$QueryXjCKList">doQueryXjCK</Url>
+    <!--扫描码查询商品信息 参数 UserMD-->
+    <Url name="doQueryCKBySMM" type="21" errorType="0" cacheTime="1" className=".Gongying$QueryCKBySMMList">doQueryCKBySMM</Url>
+    <!--扫描码查询商品信息 参数 UserMD-->
+    <Url name="jf_doQueryJdk" type="21" errorType="0" cacheTime="1" className=".Gongying$QueryCKBySMMList">jf_doQueryJdk</Url>
+    <!--查询库存量 userkey-->
+    <Url name="doQueryMonthXse" type="21" errorType="0" cacheTime="1" className=".Gongying$QueryMonthXse">doQueryMonthXse</Url>
+    <!--查询库存量 userkey-->
+    <Url name="doQueryJFDetail" type="21" errorType="0" cacheTime="1" className=".Gongying$QueryJFDetailList">doQueryJFDetail</Url>
+    <!--查询库存量 userkeya-->
+    <Url name="kcpd_sp" type="21" errorType="0" cacheTime="1" className=".Gongying$KcpdSpList">kcpd_sp</Url>
+    <!--查询库存量 kupd-->
+    <Url name="kupd" type="21" errorType="0" cacheTime="1" className=".Gongying$KupdList">kupd</Url>
+    <!--查询门店信息-->
+    <Url name="doqueryMyDetailMsg" type="21" errorType="0" cacheTime="1" className=".Gongying$MDXX">doqueryMyDetailMsg</Url>
+  </Api>
+</Apis>

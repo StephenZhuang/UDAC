@@ -1,0 +1,72 @@
+package com.udows.eshop.proto;
+option java_outer_classname = "MAppGoods";
+import "eshop_ret.proto";
+
+message MGoodsList {
+	repeated MGoods result = 1;
+	optional string total = 2;
+}
+
+message MGoods {
+	optional string id = 1;	   //id
+	optional string code = 2;  //编号
+	optional string name = 3;  //名称
+	optional string marketPrice = 4;  //市场价
+	optional string money = 5;  //价格
+	optional string price = 6;  //活动价
+	optional int32 isNew = 7;  //是否新品
+	optional int32 isHot = 8;  //是否热销
+	optional string faceImg = 9;  //封面
+	optional string showImg = 10;  //组图
+	optional string descImg = 11;  //详情图
+	optional string info = 12;  //描述
+	optional int32 goodRate = 13;  //好评度
+	optional int32 commentCnt = 14;  //评价人数
+	optional int32 stars = 15;  //星级1-5
+	optional int32 focus = 16;  //是否已关注
+	repeated MGoods maybeLikes = 17;//也许还喜欢商品
+	optional int32 num = 18;  //数量
+	optional int32 isComment = 19;  //是否已经评论
+	optional string cateId = 20;  //分类ID
+	repeated MParams params = 21; //规格
+	optional string param = 22; //规格字符串
+}
+
+message MParams {
+	optional string id = 1;  //规格ID
+	optional string name = 2;  //规格名称
+	repeated string param = 3; //参数
+}
+
+/**
+@api GoodsList GoodsList	//商品列表(需要分页) /mobile?methodno=GoodsList&debug=1&appid=1&deviceid=&page=&limit=&cateId=&key=&order=
+@param optional string cateId	//分类ID
+@param optional string key	//关键字
+@param optional number order	//排序1:销量(默认) 2:价格低 3:价格高 4:新品 5:人气
+@return MGoodsList
+*/
+
+/**
+@api Goods Goods	//商品详情   /mobile?methodno=Goods&debug=1&appid=1&deviceid=&id=
+@param required string id
+@return MGoods
+*/
+
+/**
+@api ShoppingCart ShoppingCart	//购物车(需要登录) /mobile?methodno=ShoppingCart&debug=1&appid=1&userid=&verify=&deviceid=
+@return MGoodsList
+*/
+
+/**
+@api ShoppingCartOp ShoppingCartOp	//购物车操作(需要登录) /mobile?methodno=ShoppingCartOp&debug=1&appid=1&userid=&verify=&deviceid=&id=&type=&num=&param=
+@param required string id	//商品ID
+@param required number type //1:add 2:del 3:update 
+@param required number num
+@param required string param
+@return MRet
+*/
+
+/**
+@api ShoppingCartCount ShoppingCartCount	//购物车数量(需要登录) /mobile?methodno=ShoppingCartCount&debug=1&appid=1&userid=&verify=&deviceid=
+@return MRet
+*/

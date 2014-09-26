@@ -1,0 +1,9 @@
+#!/bin/bash
+dir=$(cd "$(dirname "$0")"; pwd)
+cd $dir
+cd proto
+/Users/ryan/soft/protobuf/src/protoc --java_out=../src *.proto
+/Users/ryan/soft/protobuf/src/protoc --cpp_out=../cproto *.proto
+/Users/ryan/soft/ProtocolBuffers/src/protoc --objc_out=../iosProto *.proto
+
+

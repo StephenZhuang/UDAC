@@ -1,0 +1,220 @@
+package com.mdx.store.data.proto;
+option java_outer_classname = "GongT" ; 
+
+message QueryAllCanBackCPList{ //查询库存-返回参数(UserccReturn)
+	repeated QueryAllCanBackCP data = 1; //评论列表
+}
+
+message QueryAllCanBackCP {    
+	optional string class = 1; //固定不用管
+	optional string cpcode = 2; //商品编码
+	optional string cpname = 3; //商品名称
+	optional string pk_cpkey = 4; //产品Key
+	optional string cpprice= 5;  //产品单价
+}
+/**
+@api jf_doQueryAllCanBackCP jf_doQueryAllCanBackCP	//1.1	查询可以兑换商品
+@return QueryAllCanBackCPList
+*/
+
+
+message MakeJFOrder {    
+	optional string retuenmsg = 1; //对应的失败或者成功信息，成功的时候也要提示信息s
+	optional string returntype = 2; //1 代表成功 2 代表失败
+	optional string class = 3; //商品名称
+}
+/**
+@api jf_doMakeJFOrder jf_doMakeJFOrder	//1.1	查询可以兑换商品
+@param optional string jforder //传递参数:[{"class":"com.shqj.webservice.entity.JFBackOrder","count":12,"pk_cpkey":"商品KEY","pk_key":"门店KEY”}]
+@return MakeJFOrder
+*/
+
+
+message QueryAllMyOrderList{ //查询库存-返回参数(UserccReturn)
+	repeated QueryAllMyOrder data = 1; //评论列表
+}
+
+message QueryAllMyOrder {    
+	optional string allcount = 1; //总数
+	optional string allprice = 2; //总额
+	optional string appdate = 3; //审批日期
+	optional string appstatus = 4; //发货状态
+	optional string backdate= 5;  //兑换日期
+	optional string class= 5;  //
+	optional string connectaddr= 5;  //联系地址
+	optional string connectman= 5;  //联系人
+	optional string connectmoblie= 5;  // 联系电话
+	optional string dbillcode= 5;  //单据号
+	optional string sendcode= 5;  //货运单号 
+	optional string sendcorp= 6;   //发货公司
+	optional string senddate= 6;   //发货日期
+	optional string sendstatus= 6;   //发货状态
+	optional string cpcode= 6;   //商品编码
+	optional string cpname= 6;   //商品名称
+	optional string cpcount= 6;   //商品数量
+	optional string cpprice= 6;   //商品单价
+	optional string allprice= 6;   //商品单价
+	optional string sendcount= 6;   //发放金额
+	optional string surestatus= 6;   //确认状态
+	optional string suredate= 6;   //确认日期
+}
+/**
+@api jf_doQueryAllMyOrder jf_doQueryAllMyOrder	//1.3	查询我的订单 userkey
+@param optional string class=com.shqj.webservice.entity.UserKey //分类
+@param optional string key  //当前门店KEY
+@return QueryAllMyOrderList
+*/
+
+message QueryDetailByCodeList{ //查询库存-返回参数(UserccReturn)
+	repeated QueryAllMyOrder data = 1; //评论列表
+}
+
+message QueryDetailByCode {    
+	optional string cpcode = 1; //商品编码
+	optional string cpname = 2; //商品名称
+	optional string cpcount = 3; //商品数量
+	optional string cpprice = 4; //商品单价
+	optional string allprice= 5;  //商品总额
+}
+/**
+@api jf_doQueryDetailByCode jf_doQueryDetailByCode	//1.3	查询我的订单 userandcode
+@param optional string class=com.shqj.webservice.entity.UserKeyAndOrderCode //分类
+@param optional string key  //当前门店KEY
+@return QueryDetailByCodeList
+*/
+
+
+/**
+@api jf_doDeleteMyOrder jf_doDeleteMyOrder	//1.3	查询我的订单 userandcode
+@param optional string class=com.shqj.webservice.entity.UserKeyAndOrderCode //分类
+@param optional string key  //当前门店KEY
+@param optional string billcode  //订单号
+@return MakeJFOrder
+*/
+
+
+message QueryJlJE {    
+	optional string allje = 1; //累计奖励额度
+	optional string dhje = 2; //兑换额度
+	optional string ffe = 3; //发放金额
+	optional string yue = 4; //余额 
+}
+
+/**
+@api jl_doQueryJlJE jl_doQueryJlJE	//2.3	查询奖励兑换单 userkey
+@param optional string class=com.shqj.webservice.entity.UserKey //分类
+@param optional string key  //当前门店KEY
+@return QueryJlJE
+*/
+
+/**
+@api jl_doMaokeOrder jl_doMaokeOrder	//2.4	门店确认兑换单 jlorder
+@param optional string class=com.shqj.webservice.entity.JLDHOrder //分类
+@param optional string dcount  //要兑换的奖励金额
+@param optional string pk_key  //当前门店KEY
+@return MakeJFOrder
+*/
+
+
+message QueryAllMyJLOrderList{ //查询库存-返回参数(UserccReturn)
+	repeated QueryAllMyJLOrder data = 1; //评论列表
+}
+
+message QueryAllMyJLOrder {    
+	optional string dbillcode = 1; //总数
+	optional string allcount = 2; //总额
+	optional string backdate = 3; //审批日期
+	optional string appstatus = 4; //发货状态
+	optional string appdate= 5;  //兑换日期
+	optional string sendstatus= 5;  //
+	optional string senddate= 5;  //联系地址
+	optional string sendcount= 5;  //联系人
+	optional string surestatus= 5;  // 联系电话
+	optional string suredate= 5;  //货运单号 
+}
+
+
+/**
+@api jl_doQueryMyjlOrder jl_doQueryMyjlOrder	//2.4	门店确认兑换单 userkey
+@param optional string class=com.shqj.webservice.entity.UserKey //分类
+@param optional string key  //当前门店KEY
+@return QueryAllMyJLOrder
+*/
+
+
+/**
+@api jl_doSureMyOrder jl_doSureMyOrder	//2.3	查询奖励兑换单 userandcode
+@param optional string class=com.shqj.webservice.entity.UserKeyAndOrderCode //分类
+@param optional string key //当前门店KEY
+@param optional string billcode //订单号
+@return MakeJFOrder
+*/
+
+
+/**
+@api jl_doDeleteMyOrder jl_doDeleteMyOrder	//2.5	删除奖励兑换单接口 userandcode
+@param optional string class=com.shqj.webservice.entity.UserKeyAndOrderCode //分类
+@param optional string key  //当前门店KEY
+@param optional string billcode  //订单号
+@return MakeJFOrder
+*/
+
+
+message QueryJlJECount {    
+	optional string je = 1; //代表总额
+	optional string kccount = 2; //代表总数量 
+}
+
+/**
+@api doQueryAllCountAndJE doQueryAllCountAndJE	//2.5	读取总数
+@param optional string class=com.shqj.webservice.entity.UserKey //分类
+@param optional string key  //当前门店KEY
+@return QueryJlJECount
+*/
+
+
+/**
+@api doAddYhkh doAddYhkh	//2.5	读取总数 useryhkh
+@param optional string class=com.shqj.webservice.entity.UserYHKH //分类
+@param optional string key  //当前门店KEY
+@param optional string khcity  //当前门店KEY
+@param optional string khsf  //当前门店KEY
+@param optional string psnname  //当前门店KEY
+@param optional string yhkh  //当前门店KEY
+@return MakeJFOrder
+*/
+
+
+/**
+@api doUpdateMyPWD doUpdateMyPWD	//2.5	读取总数 userkeypwd
+@param optional string class=com.shqj.webservice.entity.UserKeyPwd //分类
+@param optional string key  //当前门店KEY
+@param optional string pwd  //当前门店KEY
+@return MakeJFOrder
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

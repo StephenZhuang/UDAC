@@ -1,0 +1,269 @@
+﻿package com.mdx.store.data.proto;
+option java_outer_classname = "Gongying";
+
+message Login { //登录-返回参数(ReturnUser)
+	optional string class = 1; //固定不用管
+	optional string returntype = 2; //1登录成功,2登录失败
+	optional string usertype = 3; //1代理商  2门店
+	optional string deptname = 4; //登录成功后给出对应店铺名称
+	optional string key = 5; //登录key  
+}
+
+/**
+@api DoLogin doLogin	//登录-传入参数(UserInfo)
+@param optional string usercode //用户名
+@param optional string userpwd //密码
+@param optional string class=com.shqj.webservice.entity.UserInfo //分类
+@return Login
+*/
+
+
+message QueryKcList{ //查询库存-返回参数(UserccReturn)
+	repeated QueryKc data = 1; //评论列表
+}
+
+message QueryKc {    
+	optional string class = 1; //固定不用管
+	optional string spcode = 2; //商品编码
+	optional string spname = 3; //商品名称
+	optional string spcount = 4; //库存数量
+	optional string dj = 4; //库存数量
+	optional string  allje= 4; //库存数量
+}
+
+/**
+@api DoQueryKc doQueryKc	//查查询库存-传入参数(UserKey)
+@param optional string key //当前门店或代理商的key
+@param optional string class=com.shqj.webservice.entity.UserKey //分类
+@return QueryKcList
+*/
+
+
+message QueryMdList{ //查询门店-返回参数(UserMD)
+	repeated QueryMd data = 1; //评论列表
+}
+
+message QueryMd {   
+	optional string class = 1; //固定不用管
+	optional string key = 2; //商品编码
+	optional string mdcode = 3; //商品名称
+	optional string mdname = 4; //库存数量
+}
+
+/**
+@api doQueryMD doQueryMD	//查询门店-传入参数(UserKey)
+@param optional string key //当前门店或代理商的key
+@param optional string class=com.shqj.webservice.entity.UserKey //分类
+@return QueryMdList
+*/
+
+
+message QueryJdkList{  //查询积分-返回参数(UserJF)
+	repeated QueryJdk data = 1; //评论列表
+}
+
+message QueryJdk {    //参数UserJF
+	optional string class = 1; //固定不用管
+	optional string jf = 2; //积分
+	optional string jfbak = 3; //已兑换积分
+	optional string rq = 4; //日期
+	optional string yue =5; //余额
+}
+
+/**
+@api doQueryJdk doQueryJdk	//查询积分-传入参数(UserKey)
+@param optional string key //当前门店或代理商的key
+@param optional string class=com.shqj.webservice.entity.UserKey //分类
+@return QueryJdkList
+*/
+
+
+message Xsck {    //扫描-传入参数(UserReturnMSG)
+	optional string class = 1; //固定不用管
+	optional string returntype = 3; //1代表成功,2代表失败
+	optional string retuenmsg = 4; //出现错误时候，这里给出错误信息
+	repeated XsckDetail data = 1; //评论列表
+}
+
+message XsckDetail {    //参数UserJF
+	optional string class = 1; //固定不用管
+	optional string retuenmsg = 2; //积分
+	optional string returntype = 3; //状态
+	optional string smm = 4; //序号
+}
+
+
+/**
+@api doXsck doXsck	//扫描-传入参数(Userxsck)
+@param optional string key //当前扫描人对应的KEY
+@param optional string class=com.shqj.webservice.entity.Userxsck //分类
+@param optional string mdkey //1.门店key，如果当前是代理商，这里就必须带有门店的key，这样后台才能知道，代理商的商品是卖给谁的 2. 如果当前人是门店，这里就随便写一个就行了
+@param optional string isth //如果当前是门店，并且是退货扫描，这里要填写Y，如果是其他扫描，则不用写任何东西
+@param optional string smcode //扫描时候对应的扫描码
+@return Xsck
+*/
+
+
+
+message QueryXjCKList{
+	repeated QueryXjCK data = 1; //评论列表
+}
+
+message QueryXjCK {    //参数UserKey
+	optional string class= 1; //固定不用管
+	optional string key = 2; //返回门店的key
+	optional string mdcode = 3; //门店编码
+	optional string mdname = 4; //门店名称
+	optional string spcode = 3; //产品code
+	optional string spname = 4; //产品名称
+	optional string spcount = 3; //数量
+	optional string dj = 4; //单价
+	optional string allje = 5; //总价
+}
+
+/**
+@api doQueryXjCK doQueryXjCK	//扫描码查询商品信息 参数 UserMD
+@param optional string key //当前门店或代理商的key
+@param optional string class=com.shqj.webservice.entity.UserKey //分类
+@param optional string smcode //扫描码
+@return QueryXjCKList
+*/
+
+
+
+message QueryCKBySMMList{
+	repeated QueryCKBySMM data = 1; //评论列表
+}
+
+message QueryCKBySMM {    //参数UserKey
+	optional string class= 1; //固定不用管
+	optional string spcode = 2; //产品code
+	optional string spname = 3; //产品名称
+	optional string spcount = 4; //数量
+	optional string dj = 4; //单价
+	optional string allje = 5; //总价
+	optional string jldj =6; //奖励单价
+}
+
+/**
+@api doQueryCKBySMM doQueryCKBySMM	//扫描码查询商品信息 参数 UserMD
+@param optional string key //当前门店或代理商的key
+@param optional string class=com.shqj.webservice.entity.UserKeyAndSMCode //分类
+@param optional string smcode //扫描码
+@return QueryCKBySMMList
+*/
+
+/**
+@api jf_doQueryJdk jf_doQueryJdk	//扫描码查询商品信息 参数 UserMD
+@param optional string key //当前门店或代理商的key
+@param optional string class=com.shqj.webservice.entity.UserKeyAndSMCode //分类
+@param optional string smcode //扫描码
+@return QueryCKBySMMList
+*/
+
+
+message QueryMonthXse {    //参数UserKey
+	optional string je = 4; //单价
+	optional string kccount = 5; //总价
+}
+
+/**
+@api doQueryMonthXse doQueryMonthXse	//查询库存量 userkey
+@param optional string key //当前门店或代理商的key
+@param optional string class=com.shqj.webservice.entity.UserKey //分类
+@return QueryMonthXse
+*/
+
+
+message QueryJFDetailList{
+	repeated QueryJFDetail data = 1; //评论列表
+}
+
+message QueryJFDetail {    //参数UserKey
+	optional string class= 1; //固定不用管
+	optional string datae = 2; //产品code
+	optional string dj = 3; //产品名称
+	optional string jfshul  = 4; //数量
+	optional string jfslbak = 4; //单价
+	optional string spcode = 5; //总价
+	optional string spcount = 5; //总价
+	optional string spname = 5; //总价
+	optional string txm = 5; //总价
+	optional string jlshul = 5; //总价
+	optional string jlback = 5; //总价
+	optional string jldj = 5; //奖励单价
+	optional string je = 4; //单价
+	optional string kccount = 5; //总价
+}
+
+/**
+@api doQueryJFDetail doQueryJFDetail	//查询库存量 userkey
+@param optional string key //当前门店或代理商的key
+@param optional string class=com.shqj.webservice.entity.UserKey //分类
+@return QueryJFDetailList
+*/
+
+
+message KcpdSpList{
+	repeated KcpdSp data = 1; //评论列表
+}
+
+message KcpdSp{    //参数UserKey
+	optional string pk_cpkey = 1; //固定不用管
+	optional string cpcode = 2; //产品code
+	optional string cpname = 3; //产品名称
+	optional string cpprice  = 4; //数量
+	repeated string smms = 3; //产品名称
+	optional string smm  = 3; //产品名称
+	optional string msg  = 3; //返回值
+}
+
+/**
+@api kcpd_sp kcpd_sp	//查询库存量 userkeya
+@return KcpdSpList
+*/
+
+
+message KupdList{
+	repeated Kupd data = 1; //评论列表
+}
+
+message Kupd{    //参数UserKey
+	optional string returntype = 1; //固定不用管
+	optional string retuenmsg = 2; //产品code
+	optional string smm  = 3; //产品名称
+
+}
+
+/**
+@api kupd kupd  //查询库存量 kupd
+@param optional string kupd;
+@return KupdList
+*/
+
+
+message MDXX{    //参数UserKey
+	optional string mydls = 1; //归属代理商
+	optional string mysf = 2; //归属省份
+	optional string mycity  = 3; //归属城市
+	optional string connectman = 1; //联系人
+	optional string connectmobile = 2; //联系电话
+	optional string connectaddr  = 3; //联系地址
+	optional string khsf = 1; //开户省份
+	optional string khcity = 2; //开户城市
+	optional string psnname  = 3; //开户名
+	optional string yhkh = 1; //银行卡号
+	optional string khh = 2; //开户行
+	optional string appstatus  = 3; //帐号审批状态
+
+}
+
+/**
+@api doqueryMyDetailMsg doqueryMyDetailMsg  //查询门店信息
+@param optional string key;
+@return MDXX
+*/
+
+
+
+

@@ -1,0 +1,102 @@
+package com.udows.eshop.proto;
+option java_outer_classname = "MReturn";
+
+message MRet {
+	optional int32 code = 1; //返回类型
+	optional string msg = 2; //返回值
+}
+
+message MApp {
+	optional string logo = 1; //首页logo
+	optional int32 moneyFreight = 2; //运费
+	repeated MRet paymentType = 3; //支付方式
+	optional string about = 4; //关于我们
+	optional string key = 5; //秘钥
+	optional string publicKey = 6; //公钥
+	optional string privateKey = 7; //私钥
+	optional string partner = 8; //合作伙伴
+	optional string seller = 9; //卖家
+	optional MAlias alias = 10; //别名
+}
+
+message MAlias {
+	optional string theme = 1; //主题馆
+	optional string main = 2; //首页
+	optional string category = 3; //分类
+	optional string shop = 4; //门店
+	optional string cart = 5; //购物车
+	optional string mine = 6; //我的
+}
+
+message MStoreList {
+	repeated MStore store = 1;
+}
+
+message MStore {
+	optional string id = 1;
+	optional string name = 2; //名称
+	optional string phone = 3; //电话
+	optional string address = 4; //地址
+	optional string lng = 5; //经度
+	optional string lat = 6; //纬度
+	optional string info = 7; //介绍
+	optional string imgs = 8; //图片集
+}
+
+message MChatList {
+	repeated MChat chat = 1;
+}
+
+message MChat {
+	optional string id = 1;
+	optional int32 type = 2; //问：0 答：1
+	optional string info = 3; //文字
+	optional string img = 4; //图片
+	optional string time = 5; //时间
+}
+
+message MImg {
+	required bytes img = 1;
+}
+
+/**
+@api AppInfo AppInfo	//应用信息 /mobile?methodno=AppInfo&debug=1&appid=1&deviceid=
+@return MApp
+*/
+
+/**
+@api UserParam UserParam //用户参数(需要登录)  /mobile?methodno=UserParam&debug=1&appid=1&deviceid=1&userid=&verify=&val=&type=&op=
+@param required string val   //内容
+@param required number type 
+@param required number op   //1:取 2:更新
+@return MRet
+*/
+
+/**
+@api StoreList StoreList	//门店列表   /mobile?methodno=StoreList&debug=1&appid=1&deviceid=1
+@return MStoreList
+*/
+
+/**
+@api FeedBack FeedBack	//用户反馈 /mobile?methodno=FeedBack&debug=1&appid=1&deviceid=1&contact=&content=
+@param required string contact   //联系方式
+@param required string content   //内容
+@return MRet
+*/
+
+/**
+@api OnlineChat OnlineChat	//在线客服(需要登录) /mobile?methodno=OnlineChat&debug=1&appid=1&deviceid=1&userid=&verify=&begin=
+@param optional string begin   //起始时间
+@return MChatList
+*/
+
+/**
+@api AddChat AddChat	//添加聊天  /mobile?methodno=AddChat&debug=1&appid=1&deviceid=1&userid=&verify=&content=
+@param optional string content   //内容或图片MImg
+@return MRet
+*/
+
+/**
+@api UpdateHeadImg UpdateHeadImg	//修改头像(需要登录)MImg /mobile?methodno=UpdateHeadImg&debug=1&appid=1&deviceid=1&userid=&verify=
+@return MRet
+*/

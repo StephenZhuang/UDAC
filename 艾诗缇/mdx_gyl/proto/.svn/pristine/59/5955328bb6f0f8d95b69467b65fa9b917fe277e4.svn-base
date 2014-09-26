@@ -1,0 +1,78 @@
+package com.udows.eshop.proto;
+option java_outer_classname = "MAppUser";
+import "eshop_ret.proto";
+import "eshop_goods.proto";
+import "eshop_index.proto";
+message MUser {
+	optional string id = 1;	   //id
+	optional string account = 2;  //账号
+	optional string headImg = 3;  //头像
+	optional string lng = 4;  //经度
+	optional string lat = 5;  //纬度
+	optional string phone = 6;  //手机号
+	optional string mail = 7;  //邮箱
+	optional string verify = 8;  //登陆校验码
+}
+
+message MUserIndex {
+	optional string id = 1;	   //id
+	optional string account = 2;  //账号
+	optional string headImg = 3;  //头像
+	optional string mail = 4;  //邮箱
+}
+
+/**
+@api Login Login	//登录 /mobile?methodno=Login&debug=1&appid=1&account=&password=&deviceid=
+@param required string account
+@param required string password
+@return MUser
+*/
+
+/**
+@api Regiest Regiest	//注册 /mobile?methodno=Regiest&debug=1&appid=1&account=&password=&deviceid=&mail=&phone=
+@param required string account
+@param required string password	//MD5
+@param required string mail
+@param optional string phone
+@return MUser
+*/
+
+/**
+@api LoginOauth LoginOauth	//第三方登录 /mobile?methodno=OauthLogin&debug=1&appid=1&type=&openId=&deviceid=&accessToken=&refreshToken=&validateTime=
+@param required string type	//1:qq 2:sina
+@param required string openId
+@param required string accessToken
+@param required string refreshToken
+@param required string validateTime
+@return MUser
+*/
+
+/**
+@api ChangePassword ChangePassword	//修改密码(需要登录) /mobile?methodno=ChangePassword&debug=1&appid=1&userid=&deviceid=&verify=&oldPwd=&newPwd=
+@param required string oldPwd	//MD5
+@param required string newPwd	//MD5
+@return MUser
+*/
+
+/**
+@api ForgetPassword ForgetPassword	//找回密码 /mobile?methodno=ForgetPassword&debug=1&appid=1&deviceid=&account=
+@param required string account	//账号或邮箱
+@return MRet
+*/
+
+/**
+@api UserInfo UserInfo	//用户主页信息(需要登录) /mobile?methodno=UserInfo&debug=1&appid=1&deviceid=&userid=&verify=
+@return MUserIndex
+*/
+
+/**
+@api Focus Focus	//关注(需要登录) /mobile?methodno=Focus&debug=1&appid=1&deviceid=&userid=&verify=&id=&type=
+@param required string id   //商品id
+@param required number type   //1:关注2:取消关注
+@return MRet
+*/
+
+/**
+@api FocusList FocusList	//关注列表(需要登录,分页) /mobile?methodno=Focus&debug=1&appid=1&deviceid=&userid=&verify=&page=&limit=
+@return MTopicDetail
+*/

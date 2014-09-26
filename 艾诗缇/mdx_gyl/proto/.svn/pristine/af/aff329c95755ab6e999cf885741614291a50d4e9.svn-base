@@ -1,0 +1,76 @@
+package com.udows.eshop.proto;
+option java_outer_classname = "MAppOrder";
+import "eshop_goods.proto";
+import "eshop_ret.proto";
+message MOrderList {
+	repeated MOrder order = 1;
+}
+
+message MOrder {
+	optional string id = 1; //id
+	optional string code = 2; //单号
+	optional int32 type = 3; //订单状态(0:已取消 1.待确认 2:待付款  3:待发货 4:已发货  5:已完成 6:退款中 7.退款失败 8:已退款 9:退款完成)
+	optional int32 paymentType = 4; //0:货到付款 1:在线支付
+	optional string goodsTotal = 5; //商品总价
+	optional string moneyFreight = 6; //运费
+	optional string money = 7; //总计
+	optional string info = 8; //备注
+	optional string address = 9; //地址
+	optional string name = 10; //收件人
+	optional string phone = 11; //联系电话
+	optional string payTime = 12; //付款时间
+	optional string backTime = 13; //退款时间
+	optional string cancelReason = 14; //退款或取消原因
+	optional string delivery = 15; //快递
+	optional string deliveryCode = 16; //快递单号
+	optional string sendTime = 17; //发货时间
+	optional string createTime = 18; //下单时间
+	repeated MGoods goods = 19; //商品列表
+	optional int32 isComment = 20; //0:否 1:是
+}
+
+/**
+@api OrderList OrderList	//订单列表(需要登录,分页) /mobile?methodno=OrderList&debug=1&appid=1&deviceid=&userid=&verify=&page=&limit=
+@return MOrderList
+*/
+
+/**
+@api Order Order	//订单详情(需要登录)  /mobile?methodno=Order&debug=1&appid=1&deviceid=&userid=&verify=&id=
+@param required string id
+@return MOrder
+*/
+
+/**
+@api AddOrder AddOrder	//添加订单(需要登录) /mobile?methodno=AddOrder&debug=1&appid=1&deviceid=&userid=&verify=&addrId=&paymentType=&goodsArray=&info=
+@param required number paymentType	//支付方式  0:货到付款 1:在线支付
+@param required string addrId	//地址id
+@param required string goodsArray	//商品json数组(内容:id,num)
+@param optional string info	//备注
+@return MOrder
+*/
+
+/**
+@api AddOrderEx AddOrderEx	//添加订单(需要登录) /mobile?methodno=AddOrderEx&debug=1&appid=1&deviceid=&userid=&verify=&addrId=&paymentType=&cartIds=&info=
+@param required number paymentType	//支付方式  0:货到付款 1:在线支付
+@param required string addrId	//地址id
+@param required string cartIds	//购物车ids
+@param optional string info	//备注
+@return MOrder
+*/
+
+/**
+@api UpdateOrder UpdateOrder	//修改订单(需要登录) /mobile?methodno=UpdateOrder&debug=1&appid=1&deviceid=&userid=&verify=&type=&id=&content=
+@param required string type	//操作类型 1:取消 2:申请退款 3:确认退款 4:确认收货
+@param required string id
+@param optional string content //取消或退款原因
+@return MRet
+*/
+
+/**
+@api UpdateAlipayBill UpdateAlipayBill	//更新支付宝支付信息 /mobile?methodno=UpdateAlipayBill&debug=1&appid=1&deviceid=&userid=&verify=&orderId=&buyAccount=&tradeNo=&money=
+@param required string orderId //订单ID
+@param required string buyAccount //支付账号
+@param required string tradeNo //支付宝订单号
+@param required string money //支付金额
+@return MRet
+*/

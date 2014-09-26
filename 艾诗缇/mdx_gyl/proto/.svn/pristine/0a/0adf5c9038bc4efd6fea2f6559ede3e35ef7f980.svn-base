@@ -1,0 +1,20 @@
+package com.udows.eshop.proto;
+option java_outer_classname = "MGoodsCategory";
+import "eshop_index.proto";
+message MCategoryList {
+	repeated MCategory result = 1;
+	repeated MTopic topic = 2; //主题活动
+}
+
+message MCategory {
+	optional string id = 1;	   //id
+	optional string img = 2;  //图标
+	optional string name = 3;  //名称
+	optional string sons = 4;  //下级说明
+}
+
+/**
+@api CategoryList CategoryList	//分类 /mobile?methodno=CategoryList&debug=1&appid=1&deviceid=&pid=
+@param required string pid	//父id 1级为0
+@return MCategoryList
+*/

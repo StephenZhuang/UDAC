@@ -1,0 +1,41 @@
+package com.udows.eshop.proto;
+option java_outer_classname = "MUserAddress";
+import "eshop_ret.proto";
+message MAddressList {
+	repeated MAddress addr = 1;
+}
+
+message MAddress {
+	optional string id = 1;	   //id
+	optional string mobile = 2;  //电话
+	optional string province = 3;  //省
+	optional string city = 4;  //市
+	optional string area = 5;  //区
+	optional string address = 6;  //地址
+	optional int32 isDefault = 7;  //是否默认
+	optional string name = 8;  //收货人
+}
+
+/**
+@api AddressList AddressList	//地址列表(需要登录)  /mobile?methodno=AddressList&debug=1&appid=1&userid=&verify=&deviceid=
+@return MAddressList
+*/
+
+/**
+@api DefaultAddress DefaultAddress	//默认地址(需要登录)  /mobile?methodno=DefaultAddress&debug=1&appid=1&userid=&verify=&deviceid=
+@return MAddress
+*/
+ 
+/**
+@api Address Address	//地址操作(需要登录) /mobile?methodno=Address&debug=1&appid=1&userid=&verify=&deviceid=&isDel=&id=&mobile=&name=&province=&city=&area=&address=&isDefault=
+@param optional string name		//收件人
+@param optional string mobile	//手机号
+@param optional string province	//省
+@param optional string city		//市
+@param optional string area		//区
+@param optional string address	//地址
+@param optional number isDefault //1:默认 0:否
+@param optional number isDel	//1:删除操作
+@param optional string id	//id
+@return MRet
+*/
