@@ -10,6 +10,12 @@
 		770A2C58199DAE50001D884C /* OrderDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 770A2C57199DAE50001D884C /* OrderDetailTableViewController.m */; };
 		770A2C5B199DD035001D884C /* JiangliTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 770A2C5A199DD035001D884C /* JiangliTableViewController.m */; };
 		770A2C5E199DDFB0001D884C /* JiangliOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 770A2C5D199DDFB0001D884C /* JiangliOrderTableViewController.m */; };
+		772DF65D19E530B5003B9364 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 772DF65C19E530B5003B9364 /* BaseTabBarController.m */; };
+		772DF65F19E53FE6003B9364 /* qiye.html in Resources */ = {isa = PBXBuildFile; fileRef = 772DF65E19E53FE6003B9364 /* qiye.html */; };
+		772DF66519E54052003B9364 /* QiyeWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 772DF66419E54052003B9364 /* QiyeWebViewController.m */; };
+		772DF66819E55419003B9364 /* TryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 772DF66719E55419003B9364 /* TryTableViewController.m */; };
+		772DF66B19E5542A003B9364 /* TryOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 772DF66A19E5542A003B9364 /* TryOrderTableViewController.m */; };
+		772DF66E19E557E5003B9364 /* SettingsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 772DF66D19E557E5003B9364 /* SettingsCollectionViewController.m */; };
 		77520937199C504500840587 /* KCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77520936199C504500840587 /* KCTableViewController.m */; };
 		7752093A199C53A500840587 /* GoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77520939199C53A500840587 /* GoodsCell.m */; };
 		7752093D199C5B8400840587 /* SoldTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7752093C199C5B8400840587 /* SoldTableViewController.m */; };
@@ -88,6 +94,17 @@
 		770A2C5A199DD035001D884C /* JiangliTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JiangliTableViewController.m; sourceTree = "<group>"; };
 		770A2C5C199DDFB0001D884C /* JiangliOrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JiangliOrderTableViewController.h; sourceTree = "<group>"; };
 		770A2C5D199DDFB0001D884C /* JiangliOrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JiangliOrderTableViewController.m; sourceTree = "<group>"; };
+		772DF65B19E530B5003B9364 /* BaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarController.h; sourceTree = "<group>"; };
+		772DF65C19E530B5003B9364 /* BaseTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarController.m; sourceTree = "<group>"; };
+		772DF65E19E53FE6003B9364 /* qiye.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = qiye.html; sourceTree = "<group>"; };
+		772DF66319E54052003B9364 /* QiyeWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiyeWebViewController.h; sourceTree = "<group>"; };
+		772DF66419E54052003B9364 /* QiyeWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiyeWebViewController.m; sourceTree = "<group>"; };
+		772DF66619E55419003B9364 /* TryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TryTableViewController.h; sourceTree = "<group>"; };
+		772DF66719E55419003B9364 /* TryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TryTableViewController.m; sourceTree = "<group>"; };
+		772DF66919E5542A003B9364 /* TryOrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TryOrderTableViewController.h; sourceTree = "<group>"; };
+		772DF66A19E5542A003B9364 /* TryOrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TryOrderTableViewController.m; sourceTree = "<group>"; };
+		772DF66C19E557E5003B9364 /* SettingsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsCollectionViewController.h; sourceTree = "<group>"; };
+		772DF66D19E557E5003B9364 /* SettingsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsCollectionViewController.m; sourceTree = "<group>"; };
 		77520935199C504500840587 /* KCTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KCTableViewController.h; sourceTree = "<group>"; };
 		77520936199C504500840587 /* KCTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KCTableViewController.m; sourceTree = "<group>"; };
 		77520938199C53A500840587 /* GoodsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsCell.h; sourceTree = "<group>"; };
@@ -361,6 +378,7 @@
 		775A8DE0199B8357008E2B38 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				772DF65E19E53FE6003B9364 /* qiye.html */,
 				775A8DE1199B8357008E2B38 /* UDAC-Info.plist */,
 				775A8DE2199B8357008E2B38 /* InfoPlist.strings */,
 				775A8DE5199B8357008E2B38 /* main.m */,
@@ -637,6 +655,16 @@
 				770A2C5A199DD035001D884C /* JiangliTableViewController.m */,
 				770A2C5C199DDFB0001D884C /* JiangliOrderTableViewController.h */,
 				770A2C5D199DDFB0001D884C /* JiangliOrderTableViewController.m */,
+				772DF65B19E530B5003B9364 /* BaseTabBarController.h */,
+				772DF65C19E530B5003B9364 /* BaseTabBarController.m */,
+				772DF66319E54052003B9364 /* QiyeWebViewController.h */,
+				772DF66419E54052003B9364 /* QiyeWebViewController.m */,
+				772DF66619E55419003B9364 /* TryTableViewController.h */,
+				772DF66719E55419003B9364 /* TryTableViewController.m */,
+				772DF66919E5542A003B9364 /* TryOrderTableViewController.h */,
+				772DF66A19E5542A003B9364 /* TryOrderTableViewController.m */,
+				772DF66C19E557E5003B9364 /* SettingsCollectionViewController.h */,
+				772DF66D19E557E5003B9364 /* SettingsCollectionViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -751,6 +779,7 @@
 				775A8EBD199B8562008E2B38 /* zbar-back.png in Resources */,
 				775A8EBA199B8562008E2B38 /* line@2x.png in Resources */,
 				775A8EC0199B8562008E2B38 /* zbar-samples.png in Resources */,
+				772DF65F19E53FE6003B9364 /* qiye.html in Resources */,
 				775A8EBB199B8562008E2B38 /* pick_bg@2x.png in Resources */,
 				775A8E61199B8546008E2B38 /* README in Resources */,
 				775A8EBC199B8562008E2B38 /* qrcode_close@2x.png in Resources */,
@@ -794,7 +823,9 @@
 				7752093D199C5B8400840587 /* SoldTableViewController.m in Sources */,
 				775A8EA9199B8562008E2B38 /* Gongying.m in Sources */,
 				775A8EAB199B8562008E2B38 /* Ios7QRViewController.m in Sources */,
+				772DF66B19E5542A003B9364 /* TryOrderTableViewController.m in Sources */,
 				770A2C5B199DD035001D884C /* JiangliTableViewController.m in Sources */,
+				772DF65D19E530B5003B9364 /* BaseTabBarController.m in Sources */,
 				775A8EB3199B8562008E2B38 /* QRCodeGenerator.m in Sources */,
 				77520943199CB04000840587 /* ExchangeViewController.m in Sources */,
 				775A8ED4199B8FF0008E2B38 /* MenuViewController.m in Sources */,
@@ -805,7 +836,10 @@
 				77520937199C504500840587 /* KCTableViewController.m in Sources */,
 				77520940199C8E8B00840587 /* ExchangeHistoryTableViewController.m in Sources */,
 				775A8EAE199B8562008E2B38 /* TitleView.m in Sources */,
+				772DF66E19E557E5003B9364 /* SettingsCollectionViewController.m in Sources */,
 				775A8EB7199B8562008E2B38 /* rscode.c in Sources */,
+				772DF66819E55419003B9364 /* TryTableViewController.m in Sources */,
+				772DF66519E54052003B9364 /* QiyeWebViewController.m in Sources */,
 				77520946199CEBC000840587 /* JifenOrderTableViewController.m in Sources */,
 				770A2C5E199DDFB0001D884C /* JiangliOrderTableViewController.m in Sources */,
 				775A8EB4199B8562008E2B38 /* qrencode.c in Sources */,
@@ -948,7 +982,7 @@
 					"$(PROJECT_DIR)/UDAC/ZBarSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2355A74E-5458-40C6-87CD-6B801A02148F";
+				PROVISIONING_PROFILE = "7407AFAC-D01B-4D8F-91F7-81A386194FD4";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -969,7 +1003,7 @@
 					"$(PROJECT_DIR)/UDAC/ZBarSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2355A74E-5458-40C6-87CD-6B801A02148F";
+				PROVISIONING_PROFILE = "7407AFAC-D01B-4D8F-91F7-81A386194FD4";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

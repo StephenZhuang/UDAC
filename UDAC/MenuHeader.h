@@ -10,4 +10,7 @@
 
 @interface MenuHeader : UICollectionReusableView
 @property (nonatomic , strong) IBOutlet UILabel *nameLabel;
+@property (nonatomic , strong) IBOutlet UILabel *subNameLabel;
+@property (nonatomic , strong) IBOutlet UILabel *addressLabel;
+@property (nonatomic , strong) IBOutlet UIImageView *logoImage;
 @end
