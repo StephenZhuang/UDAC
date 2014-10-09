@@ -27,7 +27,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     // Do any additional setup after loading the view.
-    [self addTitleView:@"" subTitle:@""];
+    [self addTitleView:@"艾诗缇" subTitle:@"设置"];
     _colorArray = [NSArray arrayWithObjects:RGB(248, 0, 94),RGB(86, 29, 230),RGB(165, 159, 41),RGB(158, 25, 231),RGB(165, 159, 41), nil];
     _titleArray = [[NSMutableArray alloc] initWithObjects:@"库存盘点",@"异常库存盘点",@"销售订单",@"密码修改",@"银行设置", nil];
 }
@@ -52,7 +52,8 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES];
+//    [self.navigationController setNavigationBarHidden:YES];
+    [self.tabBarController.tabBar setHidden:NO];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -67,6 +68,11 @@ static NSString * const reuseIdentifier = @"Cell";
     [cell.titleLabel setText:_titleArray[indexPath.row]];
     
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:_titleArray[indexPath.row] sender:indexPath];
 }
 
 #pragma mark <UICollectionViewDelegate>

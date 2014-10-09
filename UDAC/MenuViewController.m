@@ -10,6 +10,7 @@
 #import "MenuHeader.h"
 #import "MenuCell.h"
 #import "SoldTableViewController.h"
+#import "PhotoViewController.h"
 
 @interface MenuViewController ()
 
@@ -32,9 +33,10 @@
     // Do any additional setup after loading the view.
     [self addTitleView:@"" subTitle:@""];
     _colorArray = [NSArray arrayWithObjects:RGB(248, 0, 94),RGB(86, 29, 230),RGB(165, 159, 41),RGB(158, 25, 231),RGB(165, 159, 41),RGB(158, 25, 231),RGB(243, 0, 84),RGB(86, 29, 230),RGB(226, 83, 51), nil];
-    _titleArray = [[NSMutableArray alloc] initWithObjects:@"存货明细",@"销售扫码",@"积分换礼",@"换礼订单",@"店员奖励",@"奖励订单",@"试用兑换",@"试用订单",@"积分奖励", nil];
     if ([ToolUtils sharedInstance].user.usertype.integerValue == 1) {
-        [_titleArray removeObjectAtIndex:2];
+        _titleArray = [[NSMutableArray alloc] initWithObjects:@"存货明细",@"销售扫码",@"积分奖励", nil];
+    } else {
+        _titleArray = [[NSMutableArray alloc] initWithObjects:@"存货明细",@"销售扫码",@"积分换礼",@"换礼订单",@"店员奖励",@"奖励订单",@"试用兑换",@"试用订单",@"积分奖励", nil];
     }
     
     [self loadData];
@@ -62,6 +64,7 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
+    [self.tabBarController.tabBar setHidden:NO];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -87,7 +90,11 @@
         [cell.subTitleLabel setText:@"月销售额：null"];
     } else if (indexPath.row == 2) {
         [cell.subTitleLabel setHidden:NO];
-        [cell.subTitleLabel setText:@"余额：0.0"];
+        if ([ToolUtils sharedInstance].user.usertype.integerValue == 1) {
+            [cell.subTitleLabel setText:@"获取记录"];
+        } else {
+            [cell.subTitleLabel setText:@"余额：0.0"];
+        }
     } else if (indexPath.row == 8) {
         [cell.subTitleLabel setHidden:NO];
         [cell.subTitleLabel setText:@"获取记录"];
@@ -105,10 +112,22 @@
         header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
         [header.nameLabel setText:[ToolUtils sharedInstance].username];
         [header.subNameLabel setText:[ToolUtils sharedInstance].username];
-        header.layer.cornerRadius = 5;
-        header.layer.masksToBounds = YES;
-        header.layer.borderColor = [UIColor whiteColor].CGColor;
-        header.layer.borderWidth = 5;
+        header.logoImage.layer.cornerRadius = 5;
+        header.logoImage.layer.masksToBounds = YES;
+        header.logoImage.layer.borderColor = [UIColor whiteColor].CGColor;
+        header.logoImage.layer.borderWidth = 5;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoPhoto)];
+        [header.logoImage addGestureRecognizer:tap];
+        [header.logoImage setUserInteractionEnabled:YES];
+        
+        NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"photos"];
+        NSMutableArray *photoArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        for (int i = 0; i < photoArray.count; i++) {
+            if (![photoArray[i] isEqual:[NSNull null]]) {
+                [header.logoImage setImage:[photoArray objectAtIndex:i]];
+                break;
+            }
+        }
     }
     return header;
 }
@@ -118,6 +137,12 @@
     
     [self performSegueWithIdentifier:_titleArray[indexPath.row] sender:nil];
 }
+
+- (void)gotoPhoto
+{
+    [self performSegueWithIdentifier:@"photo" sender:nil];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -133,9 +158,14 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"售出"]) {
+    if ([segue.identifier isEqualToString:@"销售扫码"]) {
         SoldTableViewController *vc = segue.destinationViewController;
         vc.isSell = YES;
+    } else if ([segue.identifier isEqualToString:@"photo"]) {
+        PhotoViewController *vc = [segue destinationViewController];
+        vc.setPhotoBlock = ^(void) {
+            [self.collectionView reloadData];
+        };
     }
 }
 
