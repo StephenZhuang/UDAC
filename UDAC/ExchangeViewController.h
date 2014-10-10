@@ -20,4 +20,5 @@
 @property (nonatomic , strong) NSMutableArray *addArray;
 @property (nonatomic , weak) IBOutlet UIView *sideView;
 @property (nonatomic , weak) IBOutlet UIButton *exchangeButton;
+@property (nonatomic , assign) float jifenLeft;
 @end

@@ -24,8 +24,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self addTitleView:@"设置" subTitle:@"银行账户"];
-    _placeholderArray = @[@"开户省份",@"开户城市",@"户名",@"银行账户",@"开户行",@"开户行"];
-    
+    _placeholderArray = @[@"开户省份",@"开户城市",@"户名",@"银行账户",@"开户行"];
+    _textArray = [[NSMutableArray alloc] initWithObjects:@"",@"",@"",@"",@"",nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -57,7 +57,10 @@
     
     // Configure the cell...
     [cell.textField setPlaceholder:_placeholderArray[indexPath.row]];
-    
+    [cell.textField  setText:_textArray[indexPath.row]];
+    cell.textChangeBlock = ^(NSString *text) {
+        [_textArray replaceObjectAtIndex:indexPath.row withObject:text];
+    };
     return cell;
 }
 
@@ -66,6 +69,44 @@
 {
     [textField resignFirstResponder];
     return YES;
+}
+
+- (IBAction)submitAction:(id)sender
+{
+    for (NSString *text in _textArray) {
+        if ([text isEqualToString:@""]) {
+            [ProgressHUD showError:@"资料未填写完整"];
+            return;
+        }
+    }
+    
+    [self loadData];
+}
+
+- (void)loadData
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:@"com.shqj.webservice.entity.UserYHKH" forKey: @"class"];
+    [dic setObject:_textArray[0] forKey:@"khsf"];
+    [dic setObject:_textArray[1] forKey:@"khcity"];
+    [dic setObject:_textArray[2] forKey:@"psnname"];
+    [dic setObject:_textArray[3] forKey:@"yhkh"];
+    [dic setObject:_textArray[4] forKey:@"khh"];
+    [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"key"];
+    NSString *jsonString = [dic JSONString];
+    [params setObject:jsonString forKey: @"useryhkh"];
+    WebServiceRead *webservice = [[WebServiceRead alloc] initWithBlock:^(NSString *data) {
+        NSDictionary *dic = [data objectFromJSONString];
+        Retn *retn = [[Retn alloc] init];
+        [retn build:dic];
+        if (retn.returntype.integerValue == 1) {
+            [ProgressHUD showSuccess:@"提交成功"];
+        } else {
+            [ProgressHUD showError:@"提交失败"];
+        }
+    }];
+    [webservice postWithMethodName:@"doAddYhkh" params: params];
 }
 
 /*

@@ -25,4 +25,5 @@ typedef void(^ScanBlock)(NSString *code);
 @property (strong,nonatomic)AVCaptureVideoPreviewLayer * preview;
 @property (nonatomic, retain) UIImageView *line;
 @property (nonatomic , copy) ScanBlock scanBlock;
+@property (nonatomic , assign) BOOL isContinuous;
 @end

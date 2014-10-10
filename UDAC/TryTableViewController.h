@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TryTableViewController : UITableViewController
-
+@interface TryTableViewController : UIViewController
+{
+    float total;
+}
+@property (nonatomic , weak) IBOutlet UITableView *tableView;
+@property (nonatomic , strong) NSMutableArray *dataArray;
+@property (nonatomic , strong) NSMutableArray *addArray;
+@property (nonatomic , weak) IBOutlet UIButton *exchangeButton;
 @end

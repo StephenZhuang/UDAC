@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface SolderOrderDetailViewController : UIViewController<UITableViewDataSource ,UITableViewDelegate>
+{
+    NSString *originCode;
+}
 @property (nonatomic , weak) IBOutlet UITableView *tableView;
 @property (nonatomic , strong) NSMutableArray *dataArray;
+@property (nonatomic , strong) NSMutableArray *codeArray;
+@property (nonatomic , strong) XsddQueryAllOrder *order;
 @end

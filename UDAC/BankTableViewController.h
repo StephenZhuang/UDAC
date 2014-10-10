@@ -10,4 +10,5 @@
 
 @interface BankTableViewController : UITableViewController<UITextFieldDelegate>
 @property (nonatomic , strong) NSArray *placeholderArray;
+@property (nonatomic , strong) NSMutableArray *textArray;
 @end

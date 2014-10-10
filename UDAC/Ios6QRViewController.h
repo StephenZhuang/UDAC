@@ -18,4 +18,5 @@
 }
 @property (nonatomic, strong) UIImageView * line;
 @property (nonatomic , copy) ScanBlock scanBlock;
+@property (nonatomic , assign) BOOL isContinuous;
 @end

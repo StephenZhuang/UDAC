@@ -21,6 +21,7 @@
 		7736696819E7A9C10093AD86 /* SolderOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7736696719E7A9C10093AD86 /* SolderOrderDetailViewController.m */; };
 		7736696B19E7B15D0093AD86 /* SoldOrderDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7736696A19E7B15D0093AD86 /* SoldOrderDetailCell.m */; };
 		7736696E19E7B23D0093AD86 /* ThreeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7736696D19E7B23D0093AD86 /* ThreeCell.m */; };
+		7736697119E825070093AD86 /* PdDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7736697019E825070093AD86 /* PdDetailTableViewController.m */; };
 		77520937199C504500840587 /* KCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77520936199C504500840587 /* KCTableViewController.m */; };
 		7752093A199C53A500840587 /* GoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77520939199C53A500840587 /* GoodsCell.m */; };
 		7752093D199C5B8400840587 /* SoldTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7752093C199C5B8400840587 /* SoldTableViewController.m */; };
@@ -153,6 +154,8 @@
 		7736696A19E7B15D0093AD86 /* SoldOrderDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoldOrderDetailCell.m; sourceTree = "<group>"; };
 		7736696C19E7B23D0093AD86 /* ThreeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreeCell.h; sourceTree = "<group>"; };
 		7736696D19E7B23D0093AD86 /* ThreeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreeCell.m; sourceTree = "<group>"; };
+		7736696F19E825070093AD86 /* PdDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PdDetailTableViewController.h; sourceTree = "<group>"; };
+		7736697019E825070093AD86 /* PdDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PdDetailTableViewController.m; sourceTree = "<group>"; };
 		77520935199C504500840587 /* KCTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KCTableViewController.h; sourceTree = "<group>"; };
 		77520936199C504500840587 /* KCTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KCTableViewController.m; sourceTree = "<group>"; };
 		77520938199C53A500840587 /* GoodsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsCell.h; sourceTree = "<group>"; };
@@ -786,13 +789,15 @@
 				7799086119E6158700DA3770 /* PhotoViewController.m */,
 				779908CD19E6694000DA3770 /* KcpdViewController.h */,
 				779908CE19E6694000DA3770 /* KcpdViewController.m */,
+				7736696F19E825070093AD86 /* PdDetailTableViewController.h */,
+				7736697019E825070093AD86 /* PdDetailTableViewController.m */,
 				779908D319E6A2F600DA3770 /* ChangePwdViewController.h */,
 				779908D419E6A2F600DA3770 /* ChangePwdViewController.m */,
 				77608FAD19E7655700F804D8 /* BankTableViewController.h */,
 				77608FAE19E7655700F804D8 /* BankTableViewController.m */,
 				7736696019E778DC0093AD86 /* SoldOrderTableViewController.h */,
-				7736696619E7A9C10093AD86 /* SolderOrderDetailViewController.h */,
 				7736696119E778DC0093AD86 /* SoldOrderTableViewController.m */,
+				7736696619E7A9C10093AD86 /* SolderOrderDetailViewController.h */,
 				7736696719E7A9C10093AD86 /* SolderOrderDetailViewController.m */,
 			);
 			name = Controller;
@@ -1097,6 +1102,7 @@
 				770A2C5E199DDFB0001D884C /* JiangliOrderTableViewController.m in Sources */,
 				779908B019E6271000DA3770 /* UIImage+MultiFormat.m in Sources */,
 				779908B219E6271000DA3770 /* UIImageView+HighlightedWebCache.m in Sources */,
+				7736697119E825070093AD86 /* PdDetailTableViewController.m in Sources */,
 				77608FAF19E7655700F804D8 /* BankTableViewController.m in Sources */,
 				775A8EB4199B8562008E2B38 /* qrencode.c in Sources */,
 				775A8EB5199B8562008E2B38 /* qrinput.c in Sources */,
@@ -1240,7 +1246,7 @@
 					"$(PROJECT_DIR)/UDAC/ZBarSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E9B19EBD-6296-476F-BB76-77E2DE37A702";
+				PROVISIONING_PROFILE = "7407AFAC-D01B-4D8F-91F7-81A386194FD4";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1261,7 +1267,7 @@
 					"$(PROJECT_DIR)/UDAC/ZBarSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E9B19EBD-6296-476F-BB76-77E2DE37A702";
+				PROVISIONING_PROFILE = "7407AFAC-D01B-4D8F-91F7-81A386194FD4";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

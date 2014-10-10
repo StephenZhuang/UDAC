@@ -146,28 +146,16 @@
         stringValue = metadataObject.stringValue;
     }
     
-    [_session stopRunning];
-//    [self dismissViewControllerAnimated:YES completion:^
-//     {
-//         [timer invalidate];
-//         NSLog(@"%@",stringValue);
-//     }];
-    [timer invalidate];
     NSLog(@"%@",stringValue);
     
-    
-//    if ([[stringValue substringToIndex:GoodsUrl.length] isEqualToString:GoodsUrl]) {
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Search" bundle:nil];
-//        GoodsDetailViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"GoodsDetailViewController"];
-//        vc.goodsid = [stringValue substringFromIndex:GoodsUrl.length];
-//        [self.navigationController pushViewController:vc animated:YES];
-//    } else {
-//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:stringValue]];
-//    }
     if (_scanBlock) {
         _scanBlock(stringValue);
     }
-    [self.navigationController popViewControllerAnimated:YES];
+    if (!_isContinuous) {        
+        [_session stopRunning];
+        [timer invalidate];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 

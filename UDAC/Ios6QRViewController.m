@@ -108,50 +108,44 @@
 }
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    [timer invalidate];
-    _line.frame = CGRectMake(30, 10, 220, 2);
-    num = 0;
-    upOrdown = NO;
-    [picker dismissViewControllerAnimated:YES completion:^{
-//        [picker removeFromParentViewController];
-        UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
-        //初始化
-        ZBarReaderController * read = [ZBarReaderController new];
-        //设置代理
-        read.readerDelegate = self;
-        CGImageRef cgImageRef = image.CGImage;
-        ZBarSymbol * symbol = nil;
-        id <NSFastEnumeration> results = [read scanImage:cgImageRef];
-        for (symbol in results)
-        {
-            break;
-        }
-        NSString * result;
-        if ([symbol.data canBeConvertedToEncoding:NSShiftJISStringEncoding])
-            
-        {
-            result = [NSString stringWithCString:[symbol.data cStringUsingEncoding: NSShiftJISStringEncoding] encoding:NSUTF8StringEncoding];
-        }
-        else
-        {
-            result = symbol.data;
-        }
+    UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    //初始化
+    ZBarReaderController * read = [ZBarReaderController new];
+    //设置代理
+    read.readerDelegate = self;
+    CGImageRef cgImageRef = image.CGImage;
+    ZBarSymbol * symbol = nil;
+    id <NSFastEnumeration> results = [read scanImage:cgImageRef];
+    for (symbol in results)
+    {
+        break;
+    }
+    NSString * result;
+    if ([symbol.data canBeConvertedToEncoding:NSShiftJISStringEncoding])
         
-        
-        NSLog(@"%@",result);
-//    if ([[result substringToIndex:GoodsUrl.length] isEqualToString:GoodsUrl]) {
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Search" bundle:nil];
-//        GoodsDetailViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"GoodsDetailViewController"];
-//        vc.goodsid = [result substringFromIndex:GoodsUrl.length];
-//        [self.navigationController pushViewController:vc animated:YES];
-//    } else {
-//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:result]];
-//    }
-        if (_scanBlock) {
-            _scanBlock(result);
-        }
-        [self.navigationController popViewControllerAnimated:YES];
-    }];
+    {
+        result = [NSString stringWithCString:[symbol.data cStringUsingEncoding: NSShiftJISStringEncoding] encoding:NSUTF8StringEncoding];
+    }
+    else
+    {
+        result = symbol.data;
+    }
+    
+    
+    NSLog(@"%@",result);
+    if (_scanBlock) {
+        _scanBlock(result);
+    }
+    if (!_isContinuous) {        
+        [timer invalidate];
+        _line.frame = CGRectMake(30, 10, 220, 2);
+        num = 0;
+        upOrdown = NO;
+        [picker dismissViewControllerAnimated:YES completion:^{
+            //        [picker removeFromParentViewController];
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning

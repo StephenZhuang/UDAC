@@ -7,6 +7,7 @@
 //
 
 #import "TryTableViewController.h"
+#import "ThreeCell.h"
 
 @interface TryTableViewController ()
 
@@ -23,36 +24,29 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self addTitleView:@"试用" subTitle:@"试用兑换"];
+    _dataArray = [[NSMutableArray alloc] init];
+    total = 0;
+    
+    [self loadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.tabBarController.tabBar setHidden:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}
-
-
-/** 获取试用商品*/
-－（void）dataload{
+- (void)loadData
+{
+//    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+//    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+//    [dic setObject:@"com.shqj.webservice.entity.UserKey" forKey: @"class"];
+//    [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"key"];
+//    NSString *jsonString = [dic JSONString];
+//    [params setObject:jsonString forKey: @"userkey"];
+//    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinished:)];
+//    [webservice postWithMethodName:@"jf_doQueryAllCanBackCP" params: params];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:@"com.shqj.webservice.entity.UserKey" forKey: @"class"];
@@ -63,44 +57,155 @@
     [webservice postWithMethodName:@"sy_doQuerySYE" params: params];
 }
 
-
 - (void)webServiceFinished:(NSString *)data
 {
+//    NSDictionary *dic = [data objectFromJSONString];
+//    QueryAllCanBackCPList *cpList = [[QueryAllCanBackCPList alloc] init];
+//    [cpList build:dic];
+    
     NSDictionary *dic = [data objectFromJSONString];
     QueryJdkList *xao=[[QueryJdkList alloc] init];
     [xao build:dic];
+    [self.dataArray removeAllObjects];
+    [self.dataArray addObjectsFromArray:xao.data];
+    [self.tableView reloadData];
 }
 
-
-/** 试用订单生成
- 参数  ［{\"class\":\"com.shqj.webservice.entity.JFBackOrder\",\"count\":数量,\"pk_cpkey\":\"商品编码\",\"pk_key\":\"登录key\"}］
- */
-－（void）dataloadsubmit:(NSString*)systr{
+- (IBAction)exchangeAction:(id)sender
+{
+    if (total == 0) {
+        return;
+    }
+    
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    [params setObject:systr forKey: @"jforder"];
-    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinishedsubmit:)];
-    [webservice postWithMethodName:@"sy_doMakeJFOrder" params: params];
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    for (QueryAllCanBackCP *cp in _dataArray) {
+        if (cp.num > 0) {
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            [dic setObject:@"com.shqj.webservice.entity.JFBackOrder" forKey: @"class"];
+            [dic setObject:[NSNumber numberWithInt:cp.num] forKey:@"count"];
+            [dic setObject:cp.pk_cpkey forKey:@"pk_cpkey"];
+            [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"pk_key"];
+            [arr addObject:dic];
+        }
+    }
+    NSString *jsonString = [arr JSONString];
+    [params setObject:jsonString forKey: @"jforder"];
+    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(exchangeFinished:)];
+    [webservice postWithMethodName:@"jf_doMakeJFOrder" params: params];
 }
 
-- (void)webServiceFinishedsubmit:(NSString *)data
+- (void)exchangeFinished:(NSString *)data
 {
     NSDictionary *dic = [data objectFromJSONString];
-    MakeJFOrder *xao=[[MakeJFOrder alloc] init];
-    [xao build:dic];
+    MakeJFOrder *retn = [[MakeJFOrder alloc] init];
+    [retn build:dic];
+    if (retn.returntype.integerValue == 1) {
+        [ProgressHUD showSuccess:@"兑换成功"];
+    } else {
+        [ProgressHUD showError:retn.retuenmsg];
+    }
+}
+
+///** 获取试用商品*/
+//－（void）dataload{
+//    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+//    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+//    [dic setObject:@"com.shqj.webservice.entity.UserKey" forKey: @"class"];
+//    [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"key"];
+//    NSString *jsonString = [dic JSONString];
+//    [params setObject:jsonString forKey: @"userkey"];
+//    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinished:)];
+//    [webservice postWithMethodName:@"sy_doQuerySYE" params: params];
+//}
+//
+//
+//- (void)webServiceFinished:(NSString *)data
+//{
+//    NSDictionary *dic = [data objectFromJSONString];
+//    QueryJdkList *xao=[[QueryJdkList alloc] init];
+//    [xao build:dic];
+//}
+//
+//
+///** 试用订单生成
+// 参数  ［{\"class\":\"com.shqj.webservice.entity.JFBackOrder\",\"count\":数量,\"pk_cpkey\":\"商品编码\",\"pk_key\":\"登录key\"}］
+// */
+//－（void）dataloadsubmit:(NSString*)systr{
+//    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+//    [params setObject:systr forKey: @"jforder"];
+//    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinishedsubmit:)];
+//    [webservice postWithMethodName:@"sy_doMakeJFOrder" params: params];
+//}
+//
+//- (void)webServiceFinishedsubmit:(NSString *)data
+//{
+//    NSDictionary *dic = [data objectFromJSONString];
+//    MakeJFOrder *xao=[[MakeJFOrder alloc] init];
+//    [xao build:dic];
+//}
+
+#pragma -mark tableview delegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
 }
 
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 1;
+    }
+    return self.dataArray.count;
+}
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 31;
+}
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+        
+    if (indexPath.section == 0) {
+        ThreeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ThreeCell"];
+        
+        [cell.nameLabel setText:@"商品名称"];
+        [cell.priceLabel setText:@"单价"];
+        [cell.totalPriceLabel setText:@"金额"];
+        [cell.countLabel setText:@"数量"];
+        [cell.step setHidden:YES];
+        return cell;
+    }
+    ThreeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ThreeCell"];
+//    QueryAllCanBackCP *cp = [self.dataArray objectAtIndex:indexPath.row];
+//    
+//    [cell.nameLabel setText:cp.cpname];
+//    [cell.priceLabel setText:[NSString stringWithFormat:@"%.1f",cp.cpprice.floatValue]];
+//    [cell.totalPriceLabel setText:[NSString stringWithFormat:@"%.1f",cp.num * cp.cpprice.floatValue]];
+//    [cell.countLabel setText:[NSString stringWithFormat:@"%i",cp.num]];
+//    cell.stepBlcok = ^(double num) {
+//        cp.num = num;
+//        [self configTotal];
+//    };
+    [cell.step setHidden:NO];
     return cell;
 }
-*/
+
+- (void)configTotal
+{
+    total = 0;
+    for (QueryAllCanBackCP *cp in _dataArray) {
+        total += cp.num * cp.cpprice.floatValue;
+    }
+    
+    if (total == 0) {
+        [_exchangeButton setTitle:@"立刻兑换" forState:UIControlStateNormal];
+    } else {
+        [_exchangeButton setTitle:[NSString stringWithFormat:@"立刻兑换(%1.f)",total] forState:UIControlStateNormal];
+    }
+}
 
 /*
 // Override to support conditional editing of the table view.

@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface KcpdViewController : UIViewController<UITableViewDataSource , UITableViewDelegate>
+{
+    NSString *orginCode;
+}
 @property (nonatomic , weak) IBOutlet UITableView *tableView;
 @property (nonatomic , strong) NSMutableArray *dataArray;
+@property (nonatomic , assign) BOOL isUnusual;
 @end

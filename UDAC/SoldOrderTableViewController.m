@@ -8,6 +8,7 @@
 
 #import "SoldOrderTableViewController.h"
 #import "SoldOrderCell.h"
+#import "SolderOrderDetailViewController.h"
 
 @interface SoldOrderTableViewController ()
 
@@ -24,6 +25,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self addTitleView:@"销售" subTitle:@"销售订单"];
+    _dataArray = [[NSMutableArray alloc] init];
+    [self loadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -47,7 +50,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 10;
     return _dataArray.count;;
 }
 
@@ -56,25 +58,43 @@
     SoldOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SoldOrderCell" forIndexPath:indexPath];
     
     // Configure the cell...
-    NSObject *obj = [[NSObject alloc] init];
-    
+    XsddQueryAllOrder *order = _dataArray[indexPath.row];
+    [cell.orderCodeLabel setText:order.billcode];
+    [cell.orderTimeLabel setText:order.riqi];
+    [cell.guestLabel setText:order.kh];
+    [cell.solderLabel setText:order.ywy];
+    [cell.addressLabel setText:[NSString stringWithFormat:@"收货地址：%@",order.shdiz]];
     return cell;
 }
 
-－（void）dataload｛
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinished:)];
-    [webservice postWithMethodName:@"xsdd_doQueryAllOrder" params: params];
-｝
-
-
-- (void)webServiceFinished:(NSString *)data
+- (void)loadData
 {
-    NSDictionary *dic = [data objectFromJSONString];
-    XsddQueryAllOrderList *xao=[[XsddQueryAllOrderList alloc] init];
-    [xao build:dic];
-    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    WebServiceRead *webservice = [[WebServiceRead alloc] initWithBlock:^(NSString *data) {
+        NSDictionary *dic = [data objectFromJSONString];
+        XsddQueryAllOrderList *xao=[[XsddQueryAllOrderList alloc] init];
+        [xao build:dic];
+        [self.dataArray removeAllObjects];
+        [self.dataArray addObjectsFromArray:xao.data];
+        [self.tableView reloadData];
+    }];
+    [webservice postWithMethodName:@"xsdd_doQueryAllOrder" params: params];
 }
+
+//－（void）dataload｛
+//    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+//    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinished:)];
+//    [webservice postWithMethodName:@"xsdd_doQueryAllOrder" params: params];
+//｝
+//
+//
+//- (void)webServiceFinished:(NSString *)data
+//{
+//    NSDictionary *dic = [data objectFromJSONString];
+//    XsddQueryAllOrderList *xao=[[XsddQueryAllOrderList alloc] init];
+//    [xao build:dic];
+//    
+//}
 
 
 /*
@@ -111,14 +131,19 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    SoldOrderCell *cell = sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    XsddQueryAllOrder *order = _dataArray[indexPath.row];
+    SolderOrderDetailViewController *vc = segue.destinationViewController;
+    vc.order = order;
 }
-*/
+
 
 @end

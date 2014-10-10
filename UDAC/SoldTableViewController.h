@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface SoldTableViewController : UITableViewController<UITextFieldDelegate>
+{
+    NSString *originCode;
+}
 @property (nonatomic , strong) NSMutableArray *dataArray;
 @property (nonatomic , strong) NSMutableArray *mDataArray;
 @property (nonatomic , strong) NSString *scanCode;

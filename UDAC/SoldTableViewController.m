@@ -43,19 +43,21 @@
     _dataArray = [[NSMutableArray alloc] init];
     _mDataArray = [[NSMutableArray alloc] init];
     _scanCode = @"";
+    originCode = @"";
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.tabBarController.tabBar setHidden:YES];
 }
 
 - (void)refreshControlValueChanged
 {
-    if (self.refreshControl.refreshing) {
-        [self loadData];
-    }
+//    if (self.refreshControl.refreshing) {
+//        [self loadData];
+//    }
 }
 
 - (void)loadData
@@ -147,29 +149,61 @@
 {
     if (IOS7_OR_LATER) {
         Ios7QRViewController *ios7 = [[Ios7QRViewController alloc] init];
+        ios7.isContinuous = YES;
         ios7.scanBlock = ^(NSString *code) {
-            self.scanCode = code;
-            self.codeTextField.text = code;
-            [self loadData];
+            if (code == nil || [code isEqualToString:originCode]) {
+                return ;
+            }
+            originCode = code;
+            [self submitWithCode:code];
         };
         [self.navigationController pushViewController:ios7 animated:YES];
     } else {
         Ios6QRViewController *ios6 = [[Ios6QRViewController alloc] init];
+        ios6.isContinuous = YES;
         ios6.scanBlock = ^(NSString *code) {
-            self.scanCode = code;
-            self.codeTextField.text = code;
-            [self loadData];
+            if (code == nil || [code isEqualToString:originCode]) {
+                return ;
+            }
+            originCode = code;
+            [self submitWithCode:code];
         };
         [self.navigationController pushViewController:ios6 animated:YES];
     }
 }
 
+- (void)submitWithCode:(NSString *)code
+{
+//    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+//    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+//    [dic setObject:@"com.shqj.webservice.entity.UserKupdPD" forKey: @"class"];
+//    [dic setObject:_kcpd.cpcode forKey:@"pk_cp"];
+//    [dic setObject:code forKey:@"smm"];
+//    [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"key"];
+//    NSString *jsonString = [@[dic] JSONString];
+//    [params setObject:jsonString forKey: @"kupd"];
+//    WebServiceRead *webservice = [[WebServiceRead alloc] initWithBlock:^(NSString *data) {
+//        NSDictionary *dic = [data objectFromJSONString];
+//        KupdList *xao=[[KupdList alloc] init];
+//        [xao build:dic];
+//        [_dataArray addObjectsFromArray:xao.data];
+//        [self.tableView reloadData];
+//    }];
+//    [webservice postWithMethodName:@"yc_kupd" params: params];
+}
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     self.scanCode = textField.text;
-    [self loadData];
+//    [self loadData];
     return YES;
+}
+
+- (IBAction)addAction:(id)sender
+{
+    [self submitWithCode:self.scanCode];
 }
 
 - (void)didReceiveMemoryWarning
