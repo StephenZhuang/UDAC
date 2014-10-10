@@ -27,4 +27,10 @@
     [item setBackButtonBackgroundImage:image forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     self.navigationItem.backBarButtonItem = item;
 }
+
+- (void)setExtrueLineHidden:(UITableView *)tableView
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
+    tableView.tableFooterView = view;
+}
 @end

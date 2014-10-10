@@ -11,4 +11,5 @@
 @interface UIViewController (TitleView)
 - (void)addTitleView:(NSString *)title subTitle:(NSString *)subTitle;
 - (void)addBackButton;
+- (void)setExtrueLineHidden:(UITableView *)tableView;
 @end
