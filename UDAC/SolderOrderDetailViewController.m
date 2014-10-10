@@ -58,6 +58,46 @@
     }
 }
 
+/** 获取详细商品*/
+－（void）dataload:(NSString *)billcode{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:[[NSString alloc] initWithFormat:@"{\"billcode\":\"%@\",\"class\":\"com.shqj.webservice.entity.XsddOrderCode\"}",billcode] forKey: @"userkeypwd"];
+    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinished:)];
+    [webservice postWithMethodName:@"xsdd_doQueryDetailOrder" params: params];
+}
+
+
+- (void)webServiceFinished:(NSString *)data
+{
+    NSDictionary *dic = [data objectFromJSONString];
+    XsddQuerydetailOrderList *xao=[[XsddQuerydetailOrderList alloc] init];
+    [xao build:dic];
+    
+}
+
+
+
+/**
+ 提交扫描二维码，躲避
+ tms:[  {\"billcode\":\"二维码\",\"smcode\":\"登录key\",\"class\":\"com.shqj.webservice.entity.XsddMake\"}]
+ */
+－（void）dataloaddsubmit:	(NSString*)tms{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:tms forKey: @"jlorder"];
+    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinishedsubmit:)];
+    [webservice postWithMethodName:@"xsdd_doXsck" params: params];
+}
+
+
+- (void)webServiceFinishedsubmit:(NSString *)data
+{
+    NSDictionary *dic = [data objectFromJSONString];
+    Retn *xao=[[Retn alloc] init];
+    [xao build:dic];
+    
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {

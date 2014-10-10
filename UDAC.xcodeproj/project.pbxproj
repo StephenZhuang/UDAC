@@ -112,6 +112,7 @@
 		779908CF19E6694000DA3770 /* KcpdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 779908CE19E6694000DA3770 /* KcpdViewController.m */; };
 		779908D219E6713D00DA3770 /* PandianCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 779908D119E6713D00DA3770 /* PandianCell.m */; };
 		779908D519E6A2F600DA3770 /* ChangePwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 779908D419E6A2F600DA3770 /* ChangePwdViewController.m */; };
+		7830094D19E7D589006DC98A /* Xsdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 7830094C19E7D589006DC98A /* Xsdd.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -401,6 +402,8 @@
 		779908D119E6713D00DA3770 /* PandianCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PandianCell.m; sourceTree = "<group>"; };
 		779908D319E6A2F600DA3770 /* ChangePwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePwdViewController.h; sourceTree = "<group>"; };
 		779908D419E6A2F600DA3770 /* ChangePwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePwdViewController.m; sourceTree = "<group>"; };
+		7830094B19E7D589006DC98A /* Xsdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xsdd.h; sourceTree = "<group>"; };
+		7830094C19E7D589006DC98A /* Xsdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Xsdd.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -728,6 +731,8 @@
 		775A8EC1199B87B7008E2B38 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7830094B19E7D589006DC98A /* Xsdd.h */,
+				7830094C19E7D589006DC98A /* Xsdd.m */,
 				775A8E6F199B8562008E2B38 /* MJsonData.h */,
 				775A8E70199B8562008E2B38 /* MJsonData.m */,
 				775A8E65199B8562008E2B38 /* GongT.h */,
@@ -786,8 +791,8 @@
 				77608FAD19E7655700F804D8 /* BankTableViewController.h */,
 				77608FAE19E7655700F804D8 /* BankTableViewController.m */,
 				7736696019E778DC0093AD86 /* SoldOrderTableViewController.h */,
-				7736696119E778DC0093AD86 /* SoldOrderTableViewController.m */,
 				7736696619E7A9C10093AD86 /* SolderOrderDetailViewController.h */,
+				7736696119E778DC0093AD86 /* SoldOrderTableViewController.m */,
 				7736696719E7A9C10093AD86 /* SolderOrderDetailViewController.m */,
 			);
 			name = Controller;
@@ -1056,6 +1061,7 @@
 				775A8EA9199B8562008E2B38 /* Gongying.m in Sources */,
 				775A8EAB199B8562008E2B38 /* Ios7QRViewController.m in Sources */,
 				779908A119E6271000DA3770 /* MJPhotoProgressView.m in Sources */,
+				7830094D19E7D589006DC98A /* Xsdd.m in Sources */,
 				779908A519E6271000DA3770 /* NSData+ImageContentType.m in Sources */,
 				772DF66B19E5542A003B9364 /* TryOrderTableViewController.m in Sources */,
 				770A2C5B199DD035001D884C /* JiangliTableViewController.m in Sources */,

@@ -57,4 +57,41 @@
 }
 */
 
+
+/** 获取盘点商品*/
+－（void）dataload{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinished:)];
+    [webservice postWithMethodName:@"kcpd_sp" params: params];
+}
+
+
+- (void)webServiceFinished:(NSString *)data
+{
+    NSDictionary *dic = [data objectFromJSONString];
+    KcpdSpList *xao=[[KcpdSpList alloc] init];
+    [xao build:dic];
+}
+
+
+/** 提交二维码
+ 参数  ［ "{\"key\":\"" + F.Verify + "\",\"pk_cp\":\"商品编号\",\"smm\":\"扫描码\",\"class\":\"com.shqj.webservice.entity.UserKupdPD\"}"］
+ */
+－（void）dataloadsubmit:(NSString *)kupd{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:kupd forKey: @"kupd"];
+    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinishedsubmit:)];
+    [webservice postWithMethodName:@"kupd" params: params];
+}
+
+
+- (void)webServiceFinishedsubmit:(NSString *)data
+{
+    NSDictionary *dic = [data objectFromJSONString];
+    KupdList *xao=[[KupdList alloc] init];
+    [xao build:dic];
+}
+
+
+
 @end
