@@ -8,6 +8,7 @@
 
 #import "JiangliTableViewController.h"
 #import "GoodsCell.h"
+#import "ThreeCell.h"
 
 @interface JiangliTableViewController ()
 
@@ -33,12 +34,19 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
     [self addTitleView:@"店员奖励" subTitle:@"奖励兑换"];
     _dataArray = [[NSMutableArray alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshControlValueChanged) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl beginRefreshing];
     [self loadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.tabBarController.tabBar setHidden:YES];
 }
 
 - (void)refreshControlValueChanged
@@ -114,7 +122,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (_queryJlJE) {
-        return 1;
+        return 3;
     }
     // Return the number of sections.
     return 0;
@@ -123,16 +131,33 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 1;
+    if (section == 0 || section == 1) {
+        return 1;
+    }
+    return _dataArray.count;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
-{
-    return @" ";
-}
+//- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+//{
+//    return @" ";
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 0) {
+        ThreeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"soldcell"];
+        return cell;
+    } else if (indexPath.section == 1) {
+        ThreeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ThreeCell"];
+        [cell.countLabel setText:@"商品条码"];
+        [cell.nameLabel setText:@"商品名称"];
+        [cell.countLabel setText:@"店员奖金"];
+        return cell;
+    } else {
+        ThreeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ThreeCell"];
+        return cell;
+    }
+    
     GoodsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GoodsCell" forIndexPath:indexPath];
     [cell.nameLabel setText:_queryJlJE.allje.stringValue];
     [cell.codeLabel setText:_queryJlJE.dhje.stringValue];

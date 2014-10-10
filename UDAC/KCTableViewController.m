@@ -122,7 +122,8 @@
         
         QueryKc *querykc = [self.dataArray objectAtIndex:indexPath.row];
         [cell.nameLabel setText:querykc.spname];
-        [cell.codeLabel setText:querykc.spcode];
+        [cell.priceLabel setText:querykc.dj];
+        [cell.totalPriceLabel setText:querykc.allje];
         [cell.countLabel setText:querykc.spcount.stringValue];
     }
     return cell;

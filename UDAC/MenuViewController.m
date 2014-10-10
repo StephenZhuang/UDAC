@@ -39,8 +39,9 @@
         _titleArray = [[NSMutableArray alloc] initWithObjects:@"存货明细",@"销售扫码",@"积分换礼",@"换礼订单",@"店员奖励",@"奖励订单",@"试用兑换",@"试用订单",@"积分奖励", nil];
     }
     
+    jifen = 0.0;
     [self loadData];
-    
+    [self loadJifenData];
 }
 
 - (void)loadData
@@ -58,6 +59,26 @@
         [self.collectionView reloadData];
     }];
     [webservice postWithMethodName:@"doQueryAllCountAndJE" params: params];
+}
+
+- (void)loadJifenData
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:@"com.shqj.webservice.entity.UserKey" forKey: @"class"];
+    [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"key"];
+    NSString *jsonString = [dic JSONString];
+    [params setObject:jsonString forKey: @"userkey"];
+    WebServiceRead *webservice = [[WebServiceRead alloc] initWithBlock:^(NSString *data) {
+        NSDictionary *dic = [data objectFromJSONString];
+        QueryJdkList *jdkList = [[QueryJdkList alloc] init];
+        [jdkList build:dic];
+        if (jdkList.data.count > 0) {
+            jifen = [[jdkList.data[0] jf] floatValue];
+            [self.collectionView reloadData];
+        }
+    }];
+    [webservice postWithMethodName:@"doQueryJdk" params: params];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -93,7 +114,7 @@
         if ([ToolUtils sharedInstance].user.usertype.integerValue == 1) {
             [cell.subTitleLabel setText:@"获取记录"];
         } else {
-            [cell.subTitleLabel setText:@"余额：0.0"];
+            [cell.subTitleLabel setText:[NSString stringWithFormat:@"余额：%.1f",jifen]];
         }
     } else if (indexPath.row == 8) {
         [cell.subTitleLabel setHidden:NO];
