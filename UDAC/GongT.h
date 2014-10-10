@@ -103,9 +103,21 @@
 		商品单价
 	*/
 	@property(retain) NSNumber *cpprice;
+    /**
+        发放金额
+	*/
+    @property(retain) NSString *sendcount;
+    /**
+        商品单价
+	*/
+    @property(retain) NSString *surestatus;
+    /**
+        确认状态
+	*/
+    @property(retain) NSString *suredate;
 
 	/**
-		商品总额
+		 确认日期
 	*/
 //	@property(retain) NSString *allprice;
 
