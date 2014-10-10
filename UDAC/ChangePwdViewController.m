@@ -36,19 +36,33 @@
     return YES;
 }
 
+//String jsonValue = "{\"key\":\"" + F.Verify + "\",\"pwd\":\"" + pwd + "\",\"class\":\"com.shqj.webservice.entity.UserKeyPwd\"}";
+//UpdateOne update = new UpdateOne("doUpdateMyPWD", new String[][] { { "userkeypwd", jsonValue }, });
+
+
+- (IBAction)changAction:(id)sender{
+    if(_originPwdTextField.text==_pwdTextField.text){
+        return ;
+    }
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:@"com.shqj.webservice.entity.UserKeyPwd" forKey: @"class"];
+    [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"key"];
+    [dic setObject:_originPwdTextField.text forKey:@"pwd"];
+    NSString *jsonString = [dic JSONString];
+    [params setObject:jsonString forKey: @"userkeypwd"];
+    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinished:)];
+    [webservice postWithMethodName:@"doUpdateMyPWD" params: params];
+}
+
+- (void)webServiceFinished:(NSString *)data
+{
+    NSDictionary *dic = [data objectFromJSONString];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

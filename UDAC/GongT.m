@@ -1,4 +1,4 @@
-//
+	//
 //  GongT.h
 //  GongT
 //
@@ -45,6 +45,9 @@
 @synthesize cpcount; //商品数量
 @synthesize cpprice; //商品单价
 //@synthesize allprice; //商品总额
+@synthesize sendcount; //发放金额
+@synthesize surestatus; //确认状态
+@synthesize suredate; //确认日期
 
 - (void) build:(NSDictionary*)json{
 //        allcount=[JsonData getJsonString:json key:@"allcount"]; //总数
@@ -81,6 +84,9 @@
 //        cpprice=[JsonData getJsonString:json key:@"cpprice"]; //商品单价
     cpcount = [json objectForKey:@"cpcount"];
     cpprice = [json objectForKey:@"cpprice"];
+    sendcount=[JsonData getJsonString:json key:@"sendcount"]; //发放金额
+    surestatus=[JsonData getJsonString:json key:@"surestatus"]; //确认状态
+    suredate=[JsonData getJsonString:json key:@"suredate"]; //确认日期
 }
 
 
