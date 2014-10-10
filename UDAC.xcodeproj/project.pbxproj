@@ -16,6 +16,8 @@
 		772DF66819E55419003B9364 /* TryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 772DF66719E55419003B9364 /* TryTableViewController.m */; };
 		772DF66B19E5542A003B9364 /* TryOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 772DF66A19E5542A003B9364 /* TryOrderTableViewController.m */; };
 		772DF66E19E557E5003B9364 /* SettingsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 772DF66D19E557E5003B9364 /* SettingsCollectionViewController.m */; };
+		7736696219E778DC0093AD86 /* SoldOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7736696119E778DC0093AD86 /* SoldOrderTableViewController.m */; };
+		7736696519E77AF50093AD86 /* SoldOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7736696419E77AF50093AD86 /* SoldOrderCell.m */; };
 		77520937199C504500840587 /* KCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77520936199C504500840587 /* KCTableViewController.m */; };
 		7752093A199C53A500840587 /* GoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77520939199C53A500840587 /* GoodsCell.m */; };
 		7752093D199C5B8400840587 /* SoldTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7752093C199C5B8400840587 /* SoldTableViewController.m */; };
@@ -75,6 +77,8 @@
 		775A8EDC199B9947008E2B38 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 775A8EDB199B9947008E2B38 /* AVFoundation.framework */; };
 		775A8EDF199B9B67008E2B38 /* MenuHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 775A8EDE199B9B67008E2B38 /* MenuHeader.m */; };
 		775A8EE2199B9B9E008E2B38 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 775A8EE1199B9B9E008E2B38 /* MenuCell.m */; };
+		77608FAF19E7655700F804D8 /* BankTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77608FAE19E7655700F804D8 /* BankTableViewController.m */; };
+		77608FB219E769A100F804D8 /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77608FB119E769A100F804D8 /* TextFieldCell.m */; };
 		7799086219E6158700DA3770 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7799086119E6158700DA3770 /* PhotoViewController.m */; };
 		7799089A19E6271000DA3770 /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 7799086619E6271000DA3770 /* MBProgressHUD+Add.m */; };
 		7799089B19E6271000DA3770 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7799086719E6271000DA3770 /* MBProgressHUD.bundle */; };
@@ -135,6 +139,10 @@
 		772DF66A19E5542A003B9364 /* TryOrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TryOrderTableViewController.m; sourceTree = "<group>"; };
 		772DF66C19E557E5003B9364 /* SettingsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsCollectionViewController.h; sourceTree = "<group>"; };
 		772DF66D19E557E5003B9364 /* SettingsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsCollectionViewController.m; sourceTree = "<group>"; };
+		7736696019E778DC0093AD86 /* SoldOrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoldOrderTableViewController.h; sourceTree = "<group>"; };
+		7736696119E778DC0093AD86 /* SoldOrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoldOrderTableViewController.m; sourceTree = "<group>"; };
+		7736696319E77AF50093AD86 /* SoldOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoldOrderCell.h; sourceTree = "<group>"; };
+		7736696419E77AF50093AD86 /* SoldOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoldOrderCell.m; sourceTree = "<group>"; };
 		77520935199C504500840587 /* KCTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KCTableViewController.h; sourceTree = "<group>"; };
 		77520936199C504500840587 /* KCTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KCTableViewController.m; sourceTree = "<group>"; };
 		77520938199C53A500840587 /* GoodsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsCell.h; sourceTree = "<group>"; };
@@ -321,6 +329,10 @@
 		775A8EDE199B9B67008E2B38 /* MenuHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuHeader.m; sourceTree = "<group>"; };
 		775A8EE0199B9B9E008E2B38 /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		775A8EE1199B9B9E008E2B38 /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
+		77608FAD19E7655700F804D8 /* BankTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankTableViewController.h; sourceTree = "<group>"; };
+		77608FAE19E7655700F804D8 /* BankTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankTableViewController.m; sourceTree = "<group>"; };
+		77608FB019E769A100F804D8 /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
+		77608FB119E769A100F804D8 /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
 		7799086019E6158700DA3770 /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
 		7799086119E6158700DA3770 /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
 		7799086519E6271000DA3770 /* MBProgressHUD+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Add.h"; sourceTree = "<group>"; };
@@ -762,6 +774,10 @@
 				779908CE19E6694000DA3770 /* KcpdViewController.m */,
 				779908D319E6A2F600DA3770 /* ChangePwdViewController.h */,
 				779908D419E6A2F600DA3770 /* ChangePwdViewController.m */,
+				77608FAD19E7655700F804D8 /* BankTableViewController.h */,
+				77608FAE19E7655700F804D8 /* BankTableViewController.m */,
+				7736696019E778DC0093AD86 /* SoldOrderTableViewController.h */,
+				7736696119E778DC0093AD86 /* SoldOrderTableViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -795,6 +811,10 @@
 				77520948199CECF900840587 /* OrderCell.m */,
 				779908D019E6713D00DA3770 /* PandianCell.h */,
 				779908D119E6713D00DA3770 /* PandianCell.m */,
+				77608FB019E769A100F804D8 /* TextFieldCell.h */,
+				77608FB119E769A100F804D8 /* TextFieldCell.m */,
+				7736696319E77AF50093AD86 /* SoldOrderCell.h */,
+				7736696419E77AF50093AD86 /* SoldOrderCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1030,6 +1050,8 @@
 				779908CF19E6694000DA3770 /* KcpdViewController.m in Sources */,
 				775A8EB8199B8562008E2B38 /* split.c in Sources */,
 				775A8DEA199B8357008E2B38 /* AppDelegate.m in Sources */,
+				7736696519E77AF50093AD86 /* SoldOrderCell.m in Sources */,
+				77608FB219E769A100F804D8 /* TextFieldCell.m in Sources */,
 				7799089A19E6271000DA3770 /* MBProgressHUD+Add.m in Sources */,
 				7799089D19E6271000DA3770 /* MJPhoto.m in Sources */,
 				775A8EB1199B8562008E2B38 /* bitstream.c in Sources */,
@@ -1046,10 +1068,12 @@
 				772DF66519E54052003B9364 /* QiyeWebViewController.m in Sources */,
 				77520946199CEBC000840587 /* JifenOrderTableViewController.m in Sources */,
 				779908A819E6271000DA3770 /* SDWebImageDecoder.m in Sources */,
+				7736696219E778DC0093AD86 /* SoldOrderTableViewController.m in Sources */,
 				779908D519E6A2F600DA3770 /* ChangePwdViewController.m in Sources */,
 				770A2C5E199DDFB0001D884C /* JiangliOrderTableViewController.m in Sources */,
 				779908B019E6271000DA3770 /* UIImage+MultiFormat.m in Sources */,
 				779908B219E6271000DA3770 /* UIImageView+HighlightedWebCache.m in Sources */,
+				77608FAF19E7655700F804D8 /* BankTableViewController.m in Sources */,
 				775A8EB4199B8562008E2B38 /* qrencode.c in Sources */,
 				775A8EB5199B8562008E2B38 /* qrinput.c in Sources */,
 				775A8ED1199B8EEA008E2B38 /* UIViewController+TitleView.m in Sources */,
@@ -1192,7 +1216,7 @@
 					"$(PROJECT_DIR)/UDAC/ZBarSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E9B19EBD-6296-476F-BB76-77E2DE37A702";
+				PROVISIONING_PROFILE = "7407AFAC-D01B-4D8F-91F7-81A386194FD4";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1213,7 +1237,7 @@
 					"$(PROJECT_DIR)/UDAC/ZBarSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E9B19EBD-6296-476F-BB76-77E2DE37A702";
+				PROVISIONING_PROFILE = "7407AFAC-D01B-4D8F-91F7-81A386194FD4";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
