@@ -50,6 +50,48 @@
     return 0;
 }
 
+
+/** 获取试用商品*/
+－（void）dataload{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:@"com.shqj.webservice.entity.UserKey" forKey: @"class"];
+    [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"key"];
+    NSString *jsonString = [dic JSONString];
+    [params setObject:jsonString forKey: @"userkey"];
+    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinished:)];
+    [webservice postWithMethodName:@"sy_doQuerySYE" params: params];
+}
+
+
+- (void)webServiceFinished:(NSString *)data
+{
+    NSDictionary *dic = [data objectFromJSONString];
+    QueryJdkList *xao=[[QueryJdkList alloc] init];
+    [xao build:dic];
+}
+
+
+/** 试用订单生成
+ 参数  ［{\"class\":\"com.shqj.webservice.entity.JFBackOrder\",\"count\":数量,\"pk_cpkey\":\"商品编码\",\"pk_key\":\"登录key\"}］
+ */
+－（void）dataloadsubmit:(NSString*)systr{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:systr forKey: @"jforder"];
+    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinishedsubmit:)];
+    [webservice postWithMethodName:@"sy_doMakeJFOrder" params: params];
+}
+
+- (void)webServiceFinishedsubmit:(NSString *)data
+{
+    NSDictionary *dic = [data objectFromJSONString];
+    MakeJFOrder *xao=[[MakeJFOrder alloc] init];
+    [xao build:dic];
+}
+
+
+
+
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];

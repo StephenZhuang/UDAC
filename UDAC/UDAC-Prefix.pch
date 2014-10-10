@@ -20,6 +20,7 @@
     #import "Frame.h"
     #import "Gongying.h"
     #import "GongT.h"
+    #import "Xsdd.h"
     #import "WebServiceRead.h"
     #import "JSONKit.h"
     #import "ToolUtils.h"

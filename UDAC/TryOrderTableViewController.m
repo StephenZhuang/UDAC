@@ -50,6 +50,52 @@
     return 0;
 }
 
+
+
+/** 获取订单列表*/
+－（void）dataload{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:@"com.shqj.webservice.entity.UserKey" forKey: @"class"];
+    [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"key"];
+    NSString *jsonString = [dic JSONString];
+    [params setObject:jsonString forKey: @"userkey"];
+    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinished:)];
+    [webservice postWithMethodName:@"sy_doQueryAllMyOrder" params: params];
+}
+
+
+- (void)webServiceFinished:(NSString *)data
+{
+    NSDictionary *dic = [data objectFromJSONString];
+    QueryAllMyOrderList *xao=[[QueryAllMyOrderList alloc] init];
+    [xao build:dic];
+}
+
+
+/** 获取订单详情*/
+－（void）dataload:(NSString*)billcode{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:@"com.shqj.webservice.entity.UserKeyAndOrderCode" forKey: @"class"];
+    [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"key"];
+    [dic setObject:[billcode forKey:@"billcode"];
+    NSString *jsonString = [dic JSONString];
+    [params setObject:jsonString forKey: @"userandcode"];
+    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinished:)];
+    [webservice postWithMethodName:@"sy_doQueryAllMyOrder" params: params];
+}
+
+
+- (void)webServiceFinished:(NSString *)data
+{
+    NSDictionary *dic = [data objectFromJSONString];
+    QueryDetailByCodeList *xao=[[QueryDetailByCodeList alloc] init];
+    [xao build:dic];
+}
+
+
+
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];

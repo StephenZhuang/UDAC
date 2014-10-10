@@ -61,6 +61,21 @@
     return cell;
 }
 
+－（void）dataload｛
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinished:)];
+    [webservice postWithMethodName:@"xsdd_doQueryAllOrder" params: params];
+｝
+
+
+- (void)webServiceFinished:(NSString *)data
+{
+    NSDictionary *dic = [data objectFromJSONString];
+    XsddQueryAllOrderList *xao=[[XsddQueryAllOrderList alloc] init];
+    [xao build:dic];
+    
+}
+
 
 /*
 // Override to support conditional editing of the table view.

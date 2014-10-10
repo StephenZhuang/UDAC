@@ -144,6 +144,50 @@
 }
 
 
+/** 获取月度销售明细*/
+－（void）dataload{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:@"com.shqj.webservice.entity.UserKey" forKey: @"class"];
+    [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"key"];
+    NSString *jsonString = [dic JSONString];
+    [params setObject:jsonString forKey: @"userkey"];
+    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinished:)];
+    [webservice postWithMethodName:@"doQueryJFDetail" params: params];
+}
+
+
+- (void)webServiceFinished:(NSString *)data
+{
+    NSDictionary *dic = [data objectFromJSONString];
+    QueryJFDetailList *xao=[[QueryJFDetailList alloc] init];
+    [xao build:dic];
+}
+
+
+/** 奖励订单生成
+ 参数  {\"pk_key\":\"" + pk_key + "\",\"dcount\":\"" + dcount + "\",\"class\":\"com.shqj.webservice.entity.JLDHOrder\"}
+ */
+－（void）dataloadsubmit:(NSInteger*)dcount{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:@"com.shqj.webservice.entity.JLDHOrder" forKey: @"class"];
+    [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"pk_key"];
+    [dic setObject:dcount forKey:@"dcount"];
+    NSString *jsonString = [dic JSONString];
+    [params setObject:jsonString forKey: @"jlorder"];
+    WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinishedsubmit:)];
+    [webservice postWithMethodName:@"jl_doMaokeOrder" params: params];
+}
+
+- (void)webServiceFinishedsubmit:(NSString *)data
+{
+    NSDictionary *dic = [data objectFromJSONString];
+    MakeJFOrder *xao=[[MakeJFOrder alloc] init];
+    [xao build:dic];
+}
+
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
