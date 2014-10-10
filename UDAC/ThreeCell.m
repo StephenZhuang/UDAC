@@ -20,4 +20,13 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)valueChanged:(id)sender
+{
+    [_countLabel setText:[NSString stringWithFormat:@"%.0f",_step.value]];
+    [_totalPriceLabel setText:[NSString stringWithFormat:@"%.1f",_priceLabel.text.floatValue * _step.value]];
+    if (_stepBlcok) {
+        _stepBlcok(_step.value);
+    }
+}
+
 @end

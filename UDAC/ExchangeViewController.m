@@ -8,6 +8,7 @@
 
 #import "ExchangeViewController.h"
 #import "GoodsCell.h"
+#import "ThreeCell.h"
 
 #define LeftEdge 74
 #define DefaultLabelWidth 160
@@ -31,8 +32,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.navigationController setNavigationBarHidden:NO];
-    [self addTitleView:@"积分" subTitle:@"积分兑换"];
+    
+    [self addTitleView:@"积分" subTitle:@"积分换礼"];
     _dataArray = [[NSMutableArray alloc] init];
     _addArray = [[NSMutableArray alloc] init];
     total = 0;
@@ -42,6 +43,13 @@
     [self.view addGestureRecognizer:pan];
     
     [self loadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.tabBarController.tabBar setHidden:YES];
 }
 
 - (void)loadData
@@ -74,13 +82,15 @@
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     NSMutableArray *arr = [[NSMutableArray alloc] init];
-    for (QueryAllCanBackCP *cp in _addArray) {
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        [dic setObject:@"com.shqj.webservice.entity.JFBackOrder" forKey: @"class"];
-        [dic setObject:[NSNumber numberWithInt:cp.num] forKey:@"count"];
-        [dic setObject:cp.pk_cpkey forKey:@"pk_cpkey"];
-        [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"pk_key"];
-        [arr addObject:dic];
+    for (QueryAllCanBackCP *cp in _dataArray) {
+        if (cp.num > 0) {
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            [dic setObject:@"com.shqj.webservice.entity.JFBackOrder" forKey: @"class"];
+            [dic setObject:[NSNumber numberWithInt:cp.num] forKey:@"count"];
+            [dic setObject:cp.pk_cpkey forKey:@"pk_cpkey"];
+            [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"pk_key"];
+            [arr addObject:dic];
+        }
     }
     NSString *jsonString = [arr JSONString];
     [params setObject:jsonString forKey: @"jforder"];
@@ -101,29 +111,50 @@
 }
 
 #pragma -mark tableview delegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([tableView isEqual:_tableView]) {
-        return self.dataArray.count;
-    } else {
-        return self.addArray.count;
+    if (section == 0) {
+        return 1;
     }
+        return self.dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([tableView isEqual:_tableView]) {
-        return 44;
-    }
-    return 115;
+    return 31;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([tableView isEqual:_tableView]) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+        
+        if (indexPath.section == 0) {
+            ThreeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ThreeCell"];
+
+            [cell.nameLabel setText:@"商品名称"];
+            [cell.priceLabel setText:@"单价"];
+            [cell.totalPriceLabel setText:@"金额"];
+            [cell.countLabel setText:@"数量"];
+            [cell.step setHidden:YES];
+            return cell;
+        }
+        ThreeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ThreeCell"];
         QueryAllCanBackCP *cp = [self.dataArray objectAtIndex:indexPath.row];
-        [cell.textLabel setText:[NSString stringWithFormat:@"%@(%.1f)",cp.cpname,cp.cpprice.floatValue]];
+        
+        [cell.nameLabel setText:cp.cpname];
+        [cell.priceLabel setText:[NSString stringWithFormat:@"%.1f",cp.cpprice.floatValue]];
+        [cell.totalPriceLabel setText:[NSString stringWithFormat:@"%.1f",cp.num * cp.cpprice.floatValue]];
+        [cell.countLabel setText:[NSString stringWithFormat:@"%i",cp.num]];
+        cell.stepBlcok = ^(double num) {
+            cp.num = num;
+            [self configTotal];
+        };
+        [cell.step setHidden:NO];
         return cell;
     } else {
         GoodsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GoodsCell"];
@@ -137,31 +168,31 @@
     }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([tableView isEqual:_tableView]) {
-        [_sideView setHidden:NO];
-        [UIView animateWithDuration:0.2 animations:^(void){
-            [_sideView setFrame:CGRectMake(DefaultLabelWidth, _sideView.frame.origin.y, _sideView.frame.size.width, _sideView.frame.size.height)];
-            [_tableView setFrame:CGRectMake(-LeftEdge, _tableView.frame.origin.y, _tableView.frame.size.width, _tableView.frame.size.height)];
-        } completion:^(BOOL isFinished){
-            if (isFinished) {
-                
-            }
-        }];
-        
-        QueryAllCanBackCP *cp = [self.dataArray objectAtIndex:indexPath.row];
-        NSInteger index = [_addArray indexOfObject:cp];
-        if (index == NSNotFound) {
-            [_addArray addObject:cp];
-        } else {
-        }
-        cp.num++;
-        [_addTableView reloadData];
-        [self configTotal];
-    }
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if ([tableView isEqual:_tableView]) {
+//        [_sideView setHidden:NO];
+//        [UIView animateWithDuration:0.2 animations:^(void){
+//            [_sideView setFrame:CGRectMake(DefaultLabelWidth, _sideView.frame.origin.y, _sideView.frame.size.width, _sideView.frame.size.height)];
+//            [_tableView setFrame:CGRectMake(-LeftEdge, _tableView.frame.origin.y, _tableView.frame.size.width, _tableView.frame.size.height)];
+//        } completion:^(BOOL isFinished){
+//            if (isFinished) {
+//                
+//            }
+//        }];
+//        
+//        QueryAllCanBackCP *cp = [self.dataArray objectAtIndex:indexPath.row];
+//        NSInteger index = [_addArray indexOfObject:cp];
+//        if (index == NSNotFound) {
+//            [_addArray addObject:cp];
+//        } else {
+//        }
+//        cp.num++;
+//        [_addTableView reloadData];
+//        [self configTotal];
+//    }
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//}
 
 - (IBAction)minusAction:(UIButton *)sender
 {
@@ -197,7 +228,7 @@
 - (void)configTotal
 {
     total = 0;
-    for (QueryAllCanBackCP *cp in _addArray) {
+    for (QueryAllCanBackCP *cp in _dataArray) {
         total += cp.num * cp.cpprice.floatValue;
     }
     

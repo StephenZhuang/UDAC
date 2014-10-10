@@ -34,7 +34,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    [self addTitleView:@"奖励" subTitle:@"奖励兑换"];
+    [self addTitleView:@"店员奖励" subTitle:@"奖励兑换"];
     _dataArray = [[NSMutableArray alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshControlValueChanged) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl beginRefreshing];

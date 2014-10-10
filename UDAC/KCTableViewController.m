@@ -8,6 +8,7 @@
 
 #import "KCTableViewController.h"
 #import "GoodsCell.h"
+#import "ThreeCell.h"
 
 @interface KCTableViewController ()
 
@@ -35,6 +36,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     [self addTitleView:@"库存" subTitle:@"库存查询"];
+    [self setExtrueLineHidden:self.tableView];
     _dataArray = [[NSMutableArray alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshControlValueChanged) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl beginRefreshing];
@@ -45,6 +47,7 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.tabBarController.tabBar setHidden:YES];
 }
 
 - (void)refreshControlValueChanged
@@ -90,26 +93,40 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    if (section == 0) {
+        return 1;
+    }
     return self.dataArray.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 20;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    GoodsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    
-    QueryKc *querykc = [self.dataArray objectAtIndex:indexPath.row];
-    [cell.nameLabel setText:querykc.spname];
-    [cell.codeLabel setText:querykc.spcode];
-    [cell.countLabel setText:querykc.spcount.stringValue];
-    
+    ThreeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ThreeCell" forIndexPath:indexPath];
+    if (indexPath.section == 0) {
+        [cell.nameLabel setText:@"商品名称"];
+        [cell.countLabel setText:@"库存"];
+        [cell.priceLabel setText:@"单价"];
+        [cell.totalPriceLabel setText:@"金额"];
+    } else {
+        
+        QueryKc *querykc = [self.dataArray objectAtIndex:indexPath.row];
+        [cell.nameLabel setText:querykc.spname];
+        [cell.codeLabel setText:querykc.spcode];
+        [cell.countLabel setText:querykc.spcount.stringValue];
+    }
     return cell;
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
