@@ -28,6 +28,7 @@
     total = 0;
     
     [self loadData];
+    [self getShiyongyue];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -54,7 +55,8 @@
     NSString *jsonString = [dic JSONString];
     [params setObject:jsonString forKey: @"userkey"];
     WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(webServiceFinished:)];
-    [webservice postWithMethodName:@"sy_doQuerySYE" params: params];
+    [webservice postWithMethodName:@"sy_doQueryAllCP" params: params];
+    
 }
 
 - (void)webServiceFinished:(NSString *)data
@@ -64,7 +66,7 @@
 //    [cpList build:dic];
     
     NSDictionary *dic = [data objectFromJSONString];
-    QueryJdkList *xao=[[QueryJdkList alloc] init];
+    QueryAllCanBackCPList *xao=[[QueryAllCanBackCPList alloc] init];
     [xao build:dic];
     [self.dataArray removeAllObjects];
     [self.dataArray addObjectsFromArray:xao.data];
@@ -92,7 +94,7 @@
     NSString *jsonString = [arr JSONString];
     [params setObject:jsonString forKey: @"jforder"];
     WebServiceRead *webservice = [[WebServiceRead alloc] init:self selecter:@selector(exchangeFinished:)];
-    [webservice postWithMethodName:@"jf_doMakeJFOrder" params: params];
+    [webservice postWithMethodName:@"sy_doMakeJFOrder" params: params];
 }
 
 - (void)exchangeFinished:(NSString *)data
@@ -105,6 +107,25 @@
     } else {
         [ProgressHUD showError:retn.retuenmsg];
     }
+}
+
+- (void)getShiyongyue
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:@"com.shqj.webservice.entity.UserKey" forKey: @"class"];
+    [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"key"];
+    NSString *jsonString = [dic JSONString];
+    [params setObject:jsonString forKey: @"userkey"];
+    WebServiceRead *webservice = [[WebServiceRead alloc] initWithBlock:^(NSString *data) {
+        NSDictionary *dic = [data objectFromJSONString];
+        QueryJdk *jdk = [[QueryJdk alloc] init];
+        [jdk build:dic];
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"试用余额:%@",jdk.yue] style:UIBarButtonItemStyleBordered target:nil action:nil];
+        [item setTintColor:[UIColor whiteColor]];
+        self.navigationItem.rightBarButtonItem = item;
+    }];
+    [webservice postWithMethodName:@"sy_doQuerySYE" params: params];
 }
 
 ///** 获取试用商品*/
@@ -179,16 +200,16 @@
         return cell;
     }
     ThreeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ThreeCell"];
-//    QueryAllCanBackCP *cp = [self.dataArray objectAtIndex:indexPath.row];
-//    
-//    [cell.nameLabel setText:cp.cpname];
-//    [cell.priceLabel setText:[NSString stringWithFormat:@"%.1f",cp.cpprice.floatValue]];
-//    [cell.totalPriceLabel setText:[NSString stringWithFormat:@"%.1f",cp.num * cp.cpprice.floatValue]];
-//    [cell.countLabel setText:[NSString stringWithFormat:@"%i",cp.num]];
-//    cell.stepBlcok = ^(double num) {
-//        cp.num = num;
-//        [self configTotal];
-//    };
+    QueryAllCanBackCP *cp = [self.dataArray objectAtIndex:indexPath.row];
+
+    [cell.nameLabel setText:cp.cpname];
+    [cell.priceLabel setText:[NSString stringWithFormat:@"%.1f",cp.cpprice.floatValue]];
+    [cell.totalPriceLabel setText:[NSString stringWithFormat:@"%.1f",cp.num * cp.cpprice.floatValue]];
+    [cell.countLabel setText:[NSString stringWithFormat:@"%i",cp.num]];
+    cell.stepBlcok = ^(double num) {
+        cp.num = num;
+        [self configTotal];
+    };
     [cell.step setHidden:NO];
     return cell;
 }

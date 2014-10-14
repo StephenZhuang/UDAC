@@ -414,6 +414,7 @@
  奖励单价
 	*/
 @property(retain) NSString *jldj;
+@property(retain) NSString *state;
 
 @end
 

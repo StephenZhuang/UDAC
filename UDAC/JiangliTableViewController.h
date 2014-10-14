@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JiangliTableViewController : UITableViewController
+@interface JiangliTableViewController : UIViewController
+@property (nonatomic , weak) IBOutlet UITableView *tableView;
 @property (nonatomic , strong) NSMutableArray *dataArray;
 @property (nonatomic , strong) QueryJlJE *queryJlJE;
 @property (nonatomic , weak) IBOutlet UITextField *numTextField;
+@property (nonatomic , weak) IBOutlet UILabel *yueLabel;
 @end

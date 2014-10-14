@@ -111,6 +111,7 @@
 //            [ProgressHUD showError:@""];
 //        });
     }
+    
     NSMutableString* result=
     [[NSMutableString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
      NSRange reagestart=[result rangeOfString:@"<ns:return>"];

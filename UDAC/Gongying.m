@@ -189,6 +189,7 @@
 @synthesize spcount; //数量
 @synthesize allje; //总价
 @synthesize jldj; //奖励单价
+@synthesize state;
 
 - (void) build:(NSDictionary*)json{
         mclass=[JsonData getJsonString:json key:@"class"]; //固定不用管
@@ -204,6 +205,7 @@
     spcount = [json objectForKey:@"spcount"];
     allje=[JsonData getJsonString:json key:@"allje"]; //总价
     jldj=[JsonData getJsonString:json key:@"jldj"]; //奖励单价
+    state = @"";
 }
 
 

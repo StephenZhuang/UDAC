@@ -16,15 +16,6 @@
 
 @implementation JiangliTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -37,8 +28,6 @@
     
     [self addTitleView:@"店员奖励" subTitle:@"奖励兑换"];
     _dataArray = [[NSMutableArray alloc] init];
-    [self.refreshControl addTarget:self action:@selector(refreshControlValueChanged) forControlEvents:UIControlEventValueChanged];
-    [self.refreshControl beginRefreshing];
     [self loadData];
 }
 
@@ -47,13 +36,6 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.tabBarController.tabBar setHidden:YES];
-}
-
-- (void)refreshControlValueChanged
-{
-    if (self.refreshControl.refreshing) {
-        [self loadData];
-    }
 }
 
 - (void)loadData
@@ -75,16 +57,14 @@
     [_queryJlJE build:dic];
 //    [self.dataArray removeAllObjects];
 //    [self.dataArray addObjectsFromArray:kcList.data];
+    [_yueLabel setText:[NSString stringWithFormat:@"可兑换现金总额:%@",_queryJlJE.yue]];
     [self.tableView reloadData];
-    if (self.refreshControl.refreshing) {
-        [self.refreshControl endRefreshing];
-    }
 }
 
 - (IBAction)exchangeAction:(id)sender
 {
     [self.view endEditing:YES];
-    NSString *num = _numTextField.text;
+    NSString *num = _queryJlJE.yue.stringValue;
     if (num.length == 0) {
         return;
     }
@@ -149,7 +129,7 @@
         return cell;
     } else if (indexPath.section == 1) {
         ThreeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ThreeCell"];
-        [cell.countLabel setText:@"商品条码"];
+        [cell.codeLabel setText:@"商品条码"];
         [cell.nameLabel setText:@"商品名称"];
         [cell.countLabel setText:@"店员奖金"];
         return cell;
