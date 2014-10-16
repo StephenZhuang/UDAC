@@ -14,7 +14,14 @@
 {
     if (item.tag == 0) {
         [ToolUtils sharedInstance].isLogin = NO;
-        [self.navigationController popToRootViewControllerAnimated:YES];
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+        [UIView transitionWithView:[UIApplication sharedApplication].keyWindow duration:0.5 options:UIViewAnimationOptionTransitionFlipFromRight animations:^(void) {
+            
+            UIViewController *vc = [[self storyboard] instantiateInitialViewController];
+            [[[[UIApplication sharedApplication] delegate] window] setRootViewController:vc];
+        }completion:nil];
+        
     }
 }
 @end

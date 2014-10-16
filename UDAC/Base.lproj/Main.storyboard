@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="WYc-zZ-mFh">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -124,7 +123,7 @@
         <!--Menu View Controller-->
         <scene sceneID="odP-aA-td1">
             <objects>
-                <viewController storyboardIdentifier="MenuViewController" id="h2G-DC-B7W" customClass="MenuViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuViewController" hidesBottomBarWhenPushed="YES" id="h2G-DC-B7W" customClass="MenuViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iFd-Ox-awP"/>
                         <viewControllerLayoutGuide type="bottom" id="N0m-L7-9y4"/>
@@ -1844,7 +1843,7 @@
         <!--Settings Collection View Controller-->
         <scene sceneID="Cz9-oI-Mxz">
             <objects>
-                <collectionViewController storyboardIdentifier="SettingsCollectionViewController" id="GXO-en-r5a" customClass="SettingsCollectionViewController" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="SettingsCollectionViewController" hidesBottomBarWhenPushed="YES" id="GXO-en-r5a" customClass="SettingsCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Gb4-k2-aq5">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1907,10 +1906,32 @@
                         <color key="tintColor" red="0.97254908080000002" green="0.0" blue="0.36862745879999997" alpha="1" colorSpace="deviceRGB"/>
                         <color key="barTintColor" red="0.97254908080000002" green="0.0" blue="0.36862745879999997" alpha="1" colorSpace="deviceRGB"/>
                     </navigationBar>
+                    <connections>
+                        <segue destination="dHH-2H-WJ2" kind="relationship" relationship="rootViewController" id="m64-5F-1bB"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bzR-iQ-Joi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-454" y="-628"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Wfy-sD-39B">
+            <objects>
+                <viewController id="dHH-2H-WJ2" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CAC-qd-Hse"/>
+                        <viewControllerLayoutGuide type="bottom" id="AAR-o3-88D"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NPb-mX-LOC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="zZR-6d-MIW"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e9x-5A-O7E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-95" y="-631"/>
         </scene>
         <!--微信-->
         <scene sceneID="rDu-Dp-sNc">
