@@ -228,6 +228,7 @@
 
 - (void)submitWithCode:(NSString *)code
 {
+    [ProgressHUD showSuccess:@"扫描成功"];
 //    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
 //    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
 //    [dic setObject:@"com.shqj.webservice.entity.UserKupdPD" forKey: @"class"];

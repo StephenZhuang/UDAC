@@ -27,6 +27,12 @@
     _dataArray = [[NSMutableArray alloc] init];
     originCode = @"";
     [self addTitleView:@"库存" subTitle:@"库存盘点"];
+    
+    _codeArray = [[NSMutableArray alloc] init];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"上传" style:UIBarButtonItemStyleBordered target:self action:@selector(submit)];
+    [item setTintColor:[UIColor whiteColor]];
+    self.navigationItem.rightBarButtonItem = item;
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self scanAction:nil];
     });
@@ -39,6 +45,35 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
+- (void)submit
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    for (NSString *code in _codeArray) {
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setObject:@"com.shqj.webservice.entity.UserKupdPD" forKey: @"class"];
+        [dic setObject:_kcpd.cpcode forKey:@"pk_cp"];
+        [dic setObject:code forKey:@"smm"];
+        [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"key"];
+        [arr addObject:dic];
+    }
+    NSString *jsonString = [arr JSONString];
+    [params setObject:jsonString forKey: @"kupd"];
+    WebServiceRead *webservice = [[WebServiceRead alloc] initWithBlock:^(NSString *data) {
+        NSDictionary *dic = [data objectFromJSONString];
+        KupdList *xao=[[KupdList alloc] init];
+        [xao build:dic];
+        [_dataArray addObjectsFromArray:xao.data];
+        [_codeArray removeAllObjects];
+        [self.tableView reloadData];
+    }];
+    if (_isUnusual) {
+        [webservice postWithMethodName:@"yc_kupd" params: params];
+    } else {
+        [webservice postWithMethodName:@"kupd" params: params];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -49,7 +84,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -57,8 +92,11 @@
     // Return the number of rows in the section.
     if (section == 0) {
         return 1;
+    } else if (section == 1) {
+        return _dataArray.count;
+    } else {
+        return _codeArray.count;
     }
-    return _dataArray.count;
 }
 
 
@@ -68,9 +106,11 @@
     // Configure the cell...
     if (indexPath.section == 0) {
         [cell.textLabel setText:[NSString stringWithFormat:@"%@(%@)",_kcpd.cpname,_kcpd.cpprice]];
-    } else {
+    } else if (indexPath.section == 1) {
         Kupd *kudp = _dataArray[indexPath.row];
         [cell.textLabel setText:[NSString stringWithFormat:@"%@(%@)",kudp.smm,kudp.retuenmsg]];
+    } else {
+        [cell.textLabel setText:_codeArray[indexPath.row]];
     }
     
     return cell;
@@ -107,26 +147,9 @@
 
 - (void)submitWithCode:(NSString *)code
 {
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    [dic setObject:@"com.shqj.webservice.entity.UserKupdPD" forKey: @"class"];
-    [dic setObject:_kcpd.cpcode forKey:@"pk_cp"];
-    [dic setObject:code forKey:@"smm"];
-    [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"key"];
-    NSString *jsonString = [@[dic] JSONString];
-    [params setObject:jsonString forKey: @"kupd"];
-    WebServiceRead *webservice = [[WebServiceRead alloc] initWithBlock:^(NSString *data) {
-        NSDictionary *dic = [data objectFromJSONString];
-        KupdList *xao=[[KupdList alloc] init];
-        [xao build:dic];
-        [_dataArray addObjectsFromArray:xao.data];
-        [self.tableView reloadData];
-    }];
-    if (_isUnusual) {
-        [webservice postWithMethodName:@"yc_kupd" params: params];
-    } else {
-        [webservice postWithMethodName:@"kupd" params: params];
-    }
+    [ProgressHUD showSuccess:@"扫描成功"];
+    [_codeArray addObject:code];
+    [self.tableView reloadData];
 }
 
 /*

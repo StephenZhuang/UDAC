@@ -14,5 +14,6 @@
 }
 @property (nonatomic , strong) KcpdSp *kcpd;
 @property (nonatomic , strong) NSMutableArray *dataArray;
+@property (nonatomic , strong) NSMutableArray *codeArray;
 @property (nonatomic , assign) BOOL isUnusual;
 @end

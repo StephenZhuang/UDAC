@@ -49,6 +49,7 @@
             }
             originCode = code;
             [_codeArray addObject:code];
+            [ProgressHUD showSuccess:@"扫描成功"];
         };
         [self.navigationController pushViewController:ios7 animated:YES];
     } else {
@@ -60,6 +61,7 @@
             }
             originCode = code;
             [_codeArray addObject:code];
+            [ProgressHUD showSuccess:@"扫描成功"];
         };
         [self.navigationController pushViewController:ios6 animated:YES];
     }
