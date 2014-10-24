@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="WYc-zZ-mFh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="WYc-zZ-mFh">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -123,7 +124,7 @@
         <!--Menu View Controller-->
         <scene sceneID="odP-aA-td1">
             <objects>
-                <viewController storyboardIdentifier="MenuViewController" hidesBottomBarWhenPushed="YES" id="h2G-DC-B7W" customClass="MenuViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuViewController" id="h2G-DC-B7W" customClass="MenuViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iFd-Ox-awP"/>
                         <viewControllerLayoutGuide type="bottom" id="N0m-L7-9y4"/>
@@ -132,10 +133,9 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Aeg-yM-OGB">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <inset key="scrollIndicatorInsets" minX="0.0" minY="-20" maxX="0.0" maxY="0.0"/>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Aeg-yM-OGB">
+                                <rect key="frame" x="0.0" y="-20" width="320" height="475"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="JXX-Vq-r0C">
                                     <size key="itemSize" width="105" height="80"/>
                                     <size key="headerReferenceSize" width="50" height="198"/>
@@ -151,13 +151,19 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="库存查询" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZxT-AN-bwe">
-                                                    <rect key="frame" x="0.0" y="15" width="100" height="21"/>
+                                                    <rect key="frame" x="0.0" y="15" width="105" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHc-FO-rBc">
-                                                    <rect key="frame" x="0.0" y="44" width="100" height="21"/>
+                                                    <rect key="frame" x="0.0" y="44" width="105" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wq5-ta-kDE">
+                                                    <rect key="frame" x="0.0" y="60" width="105" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -168,6 +174,7 @@
                                         <color key="backgroundColor" red="0.33725491166114807" green="0.11372549831867218" blue="0.90196084976196289" alpha="1" colorSpace="deviceRGB"/>
                                         <connections>
                                             <outlet property="subTitleLabel" destination="RHc-FO-rBc" id="gr5-dr-TR0"/>
+                                            <outlet property="subTitleLabel2" destination="wq5-ta-kDE" id="gnc-tU-tQ4"/>
                                             <outlet property="titleLabel" destination="ZxT-AN-bwe" id="I0l-tL-Ivq"/>
                                         </connections>
                                     </collectionViewCell>
@@ -215,9 +222,9 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.38823533059999998" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
-                            <constraint firstItem="Aeg-yM-OGB" firstAttribute="top" secondItem="iFd-Ox-awP" secondAttribute="bottom" id="KPk-dM-aWM"/>
+                            <constraint firstItem="Aeg-yM-OGB" firstAttribute="top" secondItem="iFd-Ox-awP" secondAttribute="bottom" constant="-20" id="KPk-dM-aWM"/>
                             <constraint firstAttribute="trailing" secondItem="Aeg-yM-OGB" secondAttribute="trailing" id="bgQ-XF-5CU"/>
                             <constraint firstItem="N0m-L7-9y4" firstAttribute="top" secondItem="Aeg-yM-OGB" secondAttribute="bottom" id="cun-15-lWj"/>
                             <constraint firstItem="Aeg-yM-OGB" firstAttribute="leading" secondItem="sNf-T0-FTT" secondAttribute="leading" id="lPg-mN-qsd"/>
@@ -246,7 +253,7 @@
         <!--Table View Controller-->
         <scene sceneID="Yxr-6K-Lir">
             <objects>
-                <tableViewController storyboardIdentifier="KCTableViewController" id="HPm-DE-Ktx" customClass="KCTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="KCTableViewController" hidesBottomBarWhenPushed="YES" id="HPm-DE-Ktx" customClass="KCTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="79" sectionHeaderHeight="22" sectionFooterHeight="22" id="u7L-xP-Ho8">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1843,7 +1850,7 @@
         <!--Settings Collection View Controller-->
         <scene sceneID="Cz9-oI-Mxz">
             <objects>
-                <collectionViewController storyboardIdentifier="SettingsCollectionViewController" hidesBottomBarWhenPushed="YES" id="GXO-en-r5a" customClass="SettingsCollectionViewController" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="SettingsCollectionViewController" id="GXO-en-r5a" customClass="SettingsCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Gb4-k2-aq5">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2027,7 +2034,7 @@
         <!--Kcpd View Controller-->
         <scene sceneID="25p-dI-7P6">
             <objects>
-                <viewController storyboardIdentifier="KcpdViewController" id="eQP-dF-Q2Y" customClass="KcpdViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="KcpdViewController" hidesBottomBarWhenPushed="YES" id="eQP-dF-Q2Y" customClass="KcpdViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CGa-Vh-ZfR"/>
                         <viewControllerLayoutGuide type="bottom" id="g77-It-bQ3"/>

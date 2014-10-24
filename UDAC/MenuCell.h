@@ -11,5 +11,6 @@
 @interface MenuCell : UICollectionViewCell
 @property (nonatomic , strong) IBOutlet UILabel *titleLabel;
 @property (nonatomic , strong) IBOutlet UILabel *subTitleLabel;
+@property (nonatomic , strong) IBOutlet UILabel *subTitleLabel2;
 @property (nonatomic , strong) IBOutlet UIImageView *logoImage;
 @end

@@ -102,11 +102,14 @@
     MenuCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MenuCell" forIndexPath:indexPath];
     [cell.contentView setBackgroundColor:_colorArray[indexPath.row]];
     [cell.titleLabel setText:_titleArray[indexPath.row]];
+    [cell.subTitleLabel2 setHidden:YES];
     if (indexPath.row == 0) {
         [cell.subTitleLabel setHidden:NO];
         if (_queryJlJECount) {
-            [cell.subTitleLabel setText:[NSString stringWithFormat:@"库存:%@ 总额:%@",_queryJlJECount.kccount ,_queryJlJECount.je]];
+            [cell.subTitleLabel setText:[NSString stringWithFormat:@"库存:%@",_queryJlJECount.kccount]];
+            [cell.subTitleLabel2 setText:[NSString stringWithFormat:@"总额:%@",_queryJlJECount.je]];
         }
+        [cell.subTitleLabel2 setHidden:NO];
     } else if (indexPath.row == 1) {
         [cell.subTitleLabel setHidden:NO];
         [cell.subTitleLabel setText:@"月销售额：null"];

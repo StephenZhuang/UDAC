@@ -33,7 +33,9 @@
     [item setTintColor:[UIColor whiteColor]];
     self.navigationItem.rightBarButtonItem = item;
     
+    [ProgressHUD show:@"扫描启动中"];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [ProgressHUD dismiss];
         [self scanAction:nil];
     });
 }

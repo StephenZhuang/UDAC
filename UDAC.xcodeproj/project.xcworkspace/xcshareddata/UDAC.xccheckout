@@ -14,7 +14,7 @@
 		<string>https://github.com/StephenZhuang/UDAC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>UDAC.xcodeproj/project.xcworkspace</string>
+	<string>UDAC.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>EAB4791476A57F5DD70E1C199AA863E9075837FC</key>
