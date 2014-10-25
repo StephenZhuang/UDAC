@@ -54,7 +54,7 @@
     for (NSString *code in _codeArray) {
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         [dic setObject:@"com.shqj.webservice.entity.UserKupdPD" forKey: @"class"];
-        [dic setObject:_kcpd.cpcode forKey:@"pk_cp"];
+        [dic setObject:_kcpd.pk_cpkey forKey:@"pk_cp"];
         [dic setObject:code forKey:@"smm"];
         [dic setObject:[ToolUtils sharedInstance].user.key forKey:@"key"];
         [arr addObject:dic];
