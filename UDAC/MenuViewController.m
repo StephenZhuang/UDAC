@@ -34,11 +34,12 @@
     // Do any additional setup after loading the view.
     [self addTitleView:@"" subTitle:@""];
     _colorArray = [NSArray arrayWithObjects:RGB(248, 0, 94),RGB(86, 29, 230),RGB(165, 159, 41),RGB(158, 25, 231),RGB(165, 159, 41),RGB(158, 25, 231),RGB(243, 0, 84),RGB(86, 29, 230),RGB(226, 83, 51), nil];
-    if ([ToolUtils sharedInstance].user.usertype.integerValue == 1) {
-        _titleArray = [[NSMutableArray alloc] initWithObjects:@"存货明细",@"销售扫码",@"积分奖励", nil];
-    } else {
-        _titleArray = [[NSMutableArray alloc] initWithObjects:@"存货明细",@"销售扫码",@"积分换礼",@"换礼订单",@"店员奖励",@"奖励订单",@"试用兑换",@"试用订单",@"积分奖励", nil];
-    }
+    _titleArray = [NSMutableArray array];
+//    if ([ToolUtils sharedInstance].user.usertype.integerValue == 1) {
+//        _titleArray = [[NSMutableArray alloc] initWithObjects:@"存货明细",@"销售扫码",@"积分奖励", nil];
+//    } else {
+//        _titleArray = [[NSMutableArray alloc] initWithObjects:@"存货明细",@"销售扫码",@"积分换礼",@"换礼订单",@"店员奖励",@"奖励订单",@"试用兑换",@"试用订单",@"积分奖励", nil];
+//    }
     
     jifen = 0.0;
     [self loadData];
@@ -91,10 +92,11 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if ([ToolUtils sharedInstance].user.usertype.integerValue == 1) {
-        return 3;
-    }
-    return 9;
+    return _titleArray.count;
+//    if ([ToolUtils sharedInstance].user.usertype.integerValue == 1) {
+//        return 3;
+//    }
+//    return 9;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
