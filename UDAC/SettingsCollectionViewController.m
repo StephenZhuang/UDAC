@@ -29,8 +29,8 @@ static NSString * const reuseIdentifier = @"Cell";
     // Do any additional setup after loading the view.
     [self addTitleView:@"艾诗缇" subTitle:@"设置"];
     _colorArray = [NSArray arrayWithObjects:RGB(248, 0, 94),RGB(86, 29, 230),RGB(165, 159, 41),RGB(158, 25, 231),RGB(165, 159, 41), nil];
-//    _titleArray = [[NSMutableArray alloc] initWithObjects:@"库存盘点",@"异常库存盘点",@"销售订单",@"密码修改",@"银行设置", nil];
-    _titleArray = [[NSMutableArray alloc] initWithObjects:@"库存盘点",@"异常库存盘点",@"密码修改",@"银行设置", nil];
+    _titleArray = [[NSMutableArray alloc] initWithObjects:@"库存盘点",@"异常库存盘点",@"销售订单",@"密码修改",@"银行设置", nil];
+//    _titleArray = [[NSMutableArray alloc] initWithObjects:@"库存盘点",@"异常库存盘点",@"密码修改",@"银行设置", nil];
 }
 
 - (void)didReceiveMemoryWarning {
